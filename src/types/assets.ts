@@ -4,7 +4,13 @@ export interface ImageAssetDefinition {
   readonly url: string;
 }
 
-export type AssetDefinition = ImageAssetDefinition;
+export interface TilemapAssetDefinition {
+  readonly type: 'tilemapTiledJSON';
+  readonly key: string;
+  readonly url: string;
+}
+
+export type AssetDefinition = ImageAssetDefinition | TilemapAssetDefinition;
 
 export interface MissingAsset {
   readonly key: string;

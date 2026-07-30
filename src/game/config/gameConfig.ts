@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
 
 import { BootScene } from '../scenes/BootScene';
+import { ForestScene } from '../scenes/ForestScene';
 import { PreloadScene } from '../scenes/PreloadScene';
+import { TownScene } from '../scenes/TownScene';
 import { GAME_BACKGROUND_COLOR, GAME_HEIGHT, GAME_WIDTH } from './constants';
 
 export function createGameConfig(parent: string | HTMLElement): Phaser.Types.Core.GameConfig {
@@ -25,6 +27,6 @@ export function createGameConfig(parent: string | HTMLElement): Phaser.Types.Cor
         debug: false,
       },
     },
-    scene: [BootScene, PreloadScene],
+    scene: [BootScene, PreloadScene, TownScene, ForestScene],
   };
 }

@@ -4,5 +4,6 @@ playwright-report/
 test-results/
 coverage/
 package-lock.json
+public/assets/maps/*.json
 docs/*
 !docs/technical-architecture.md

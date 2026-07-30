@@ -16,8 +16,13 @@ export class PreloadScene extends Phaser.Scene {
     this.missingAssets.attach(this.load);
 
     for (const asset of assetManifest) {
-      if (asset.type === 'image') {
-        this.load.image(asset.key, asset.url);
+      switch (asset.type) {
+        case 'image':
+          this.load.image(asset.key, asset.url);
+          break;
+        case 'tilemapTiledJSON':
+          this.load.tilemapTiledJSON(asset.key, asset.url);
+          break;
       }
     }
   }
@@ -29,29 +34,13 @@ export class PreloadScene extends Phaser.Scene {
 
     const failures = this.missingAssets?.getFailures() ?? [];
 
-    this.add
-      .text(240, 117, 'LumaVale', {
-        color: '#f7edcf',
-        fontFamily: 'Georgia, serif',
-        fontSize: '24px',
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5);
+    if (failures.length > 0) {
+      this.showLoadError(failures.length);
+      return;
+    }
 
-    this.add
-      .text(240, 147, failures.length > 0 ? 'Ready with asset warnings' : 'Foundation ready', {
-        color: failures.length > 0 ? '#f0a59a' : '#b9d8b4',
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '10px',
-      })
-      .setOrigin(0.5);
-
-    this.updateStatus(
-      failures.length > 0
-        ? `Ready with ${failures.length} missing asset warning(s).`
-        : 'LumaVale is ready.',
-      failures.length > 0 ? 'warning' : 'ready',
-    );
+    this.updateStatus('Entering LumaVale Town…', 'loading');
+    this.scene.start(SCENE_KEYS.town);
   }
 
   private updateStatus(message: string, state: string): void {
@@ -61,5 +50,21 @@ export class PreloadScene extends Phaser.Scene {
       status.textContent = message;
       status.dataset.state = state;
     }
+  }
+
+  private showLoadError(failureCount: number): void {
+    const message = `Unable to load ${failureCount} required Town asset(s).`;
+
+    console.error(`[PreloadScene] ${message}`);
+    this.add
+      .text(240, 135, message, {
+        align: 'center',
+        color: '#ffe5df',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '12px',
+        wordWrap: { width: 400 },
+      })
+      .setOrigin(0.5);
+    this.updateStatus(message, 'error');
   }
 }
