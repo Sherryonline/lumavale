@@ -2,99 +2,95 @@
 
 ## Purpose
 
-This document defines the technology stack for Phase 0 and establishes the architectural boundaries for the project.
-
-The focus is to build a solid foundation before introducing persistence, multiplayer, or complex backend services.
-
----
-
-# Technology Stack
-
-| Layer            | Technology          |
-| ---------------- | ------------------- |
-| Frontend Shell   | Next.js             |
-| Language         | TypeScript          |
-| Game Engine      | Phaser 3            |
-| Styling          | Tailwind CSS        |
-| State Management | Zustand             |
-| Map Editor       | Tiled               |
-| Testing          | Vitest + Playwright |
-| Linting          | ESLint              |
-| Formatting       | Prettier            |
-| Package Manager  | npm                 |
-| Hosting          | Vercel              |
+This document defines the single-player web-game foundation for Phase 0.
+Persistence, multiplayer, and backend services remain outside the current
+architecture.
 
 ---
 
-# Project Architecture
+## Technology Stack
+
+| Layer                 | Technology            |
+| --------------------- | --------------------- |
+| Build and development | Vite                  |
+| Language              | TypeScript            |
+| Game engine           | Phaser 3              |
+| Physics               | Phaser Arcade Physics |
+| Unit testing          | Vitest                |
+| Browser testing       | Playwright            |
+| Linting               | ESLint                |
+| Formatting            | Prettier              |
+| Package manager       | npm                   |
+
+React, Next.js, Tailwind, Zustand, Supabase, and multiplayer infrastructure are
+not part of this phase.
+
+---
+
+## Runtime Architecture
 
 ```text
 Browser
-    │
-    ▼
-Next.js
-    │
-    ▼
-Phaser Game
-    │
-    ▼
-Game Systems
-    │
-    ├── Player
-    ├── Camera
-    ├── Map
-    ├── NPC
-    ├── Combat
-    ├── Inventory
-    └── Quest
+  └── Vite entry point
+      └── Phaser.Game
+          ├── BootScene
+          └── PreloadScene
+              ├── asset manifest
+              ├── missing-asset handler
+              └── future gameplay scenes and systems
 ```
 
-During Phase 0, all gameplay data may remain local.
+The game renders at an internal resolution of 480×270. Phaser uses `FIT`
+scaling to preserve the 16:9 aspect ratio and centers the canvas in the
+available browser space. Pixel-art rendering and rounded pixels are enabled.
 
-No backend communication is required.
-
----
-
-# Phase 0 Scope
-
-Included:
-
-* Local game state
-* Phaser scenes
-* Tilemap loading
-* Input handling
-* Camera
-* NPC interaction
-* Quest prototype
-* Local inventory
-* Local save (optional)
+All gameplay data remains local during Phase 0.
 
 ---
 
-# Not Included
+## Source Boundaries
 
-The following technologies are intentionally postponed:
+```text
+src/
+├── game/
+│   ├── config/    # Phaser configuration and constants
+│   ├── scenes/    # Scene lifecycle and orchestration
+│   ├── entities/  # Game-world objects
+│   ├── systems/   # Reusable game behavior
+│   └── data/      # Static manifests and game data
+├── types/         # Shared TypeScript contracts
+├── main.ts        # Browser and Phaser startup
+└── style.css      # Canvas shell and page presentation
+```
 
-* Supabase
-* Socket.IO
-* Redis
-* Dedicated game server
-* Marketplace service
-* Complex state machine libraries
-* Cloud save
-* Authentication
-* Multiplayer
-
-These systems will be introduced only after the single-player gameplay foundation has been validated.
+Scenes coordinate flow. Systems contain reusable behavior. Data modules remain
+declarative. Shared types do not depend on scene instances.
 
 ---
 
-# Architecture Principles
+## Asset Loading
 
-* Keep systems modular.
-* Prefer composition over inheritance.
-* Build only what is needed for the current phase.
-* Avoid premature optimization.
-* Delay infrastructure until gameplay is proven enjoyable.
+Assets are declared in one manifest and loaded by `PreloadScene`. Loader
+failures are recorded and reported without stopping startup. A generated
+high-contrast placeholder texture is available whenever a requested texture is
+missing.
 
-Every new dependency should have a clear purpose and support the current milestone.
+Production art is not bundled with the foundation.
+
+---
+
+## Architecture Principles
+
+- Keep scene flow explicit.
+- Prefer small systems and composition over deep inheritance.
+- Keep framework dependencies at the application boundary.
+- Add dependencies only when required by the current milestone.
+- Validate gameplay locally before introducing persistence or networking.
+
+## Excluded from Phase 0
+
+- React and Next.js
+- Supabase or other backend services
+- Authentication and cloud saves
+- Multiplayer, Socket.IO, Redis, or dedicated servers
+- Complex state-machine libraries
