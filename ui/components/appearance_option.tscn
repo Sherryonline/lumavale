@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/appearance_option.gd" id="1_option"]
+
+[node name="AppearanceOption" type="Button"]
+custom_minimum_size = Vector2(72, 72)
+theme_type_variation = &"AppearanceOption"
+focus_mode = 2
+script = ExtResource("1_option")
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_type_variation = &"CaptionLabel"
+text = "Option"
+horizontal_alignment = 1
+text_overrun_behavior = 3
+mouse_filter = 2
+
+[node name="SelectedIndicator" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -25.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = 25.0
+grow_horizontal = 0
+theme_type_variation = &"SelectedMarker"
+text = "✓"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="LockedIndicator" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -10.0
+offset_right = 28.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LockedMarker"
+text = "LOCK"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2

@@ -3,20 +3,26 @@
 [node name="TooltipPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(280, 0)
 theme_type_variation = &"TooltipPanel"
+mouse_filter = 2
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 7
 
-[node name="ItemName" type="Label" parent="Content"]
+[node name="Title" type="Label" parent="Content"]
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
+theme_type_variation = &"DarkPanelHeading"
 text = "Forest Sword"
 
-[node name="TypeAndRarity" type="Label" parent="Content"]
+[node name="Type" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
-text = "Weapon • Rare"
+text = "Type: Weapon"
+
+[node name="Rarity" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"GoldDarkLabel"
+text = "Rarity: Rare"
 
 [node name="Description" type="RichTextLabel" parent="Content"]
 custom_minimum_size = Vector2(0, 58)
@@ -25,8 +31,19 @@ theme_type_variation = &"DarkRichText"
 bbcode_enabled = true
 text = "A balanced blade issued to new LumaVale adventurers."
 fit_content = true
+scroll_active = false
 
 [node name="Stats" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
-text = "Attack +12\nRequired Level 1\nSell Value 45"
+text = "Stats: Attack +12"
+
+[node name="Requirements" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Requirements: Level 1"
+
+[node name="Value" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"GoldDarkLabel"
+text = "Value: 45 gold"

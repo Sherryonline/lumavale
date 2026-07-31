@@ -1,74 +1,112 @@
 [gd_resource type="Theme" format=3]
 
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent_hover.tres" id="1_pj467"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent.tres" id="2_ruwoc"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_disabled.tres" id="3_rkcec"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_focus.tres" id="4_xnygx"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_hover.tres" id="5_50f6b"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary.tres" id="6_a2xom"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_pressed.tres" id="7_6g0yv"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger_hover.tres" id="8_m7ow8"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger.tres" id="9_dnurm"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_dark.tres" id="10_5jr68"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/status_exp.tres" id="11_gol6e"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/status_energy.tres" id="12_7c0c4"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/status_hp.tres" id="13_al50p"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/item_hover.tres" id="14_vofj0"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/item.tres" id="15_qmyqw"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/item_selected.tres" id="16_1reg4"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit_focus.tres" id="17_ecl8w"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit.tres" id="18_sko0m"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/item_locked.tres" id="19_rkeqb"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/status_mana.tres" id="20_cigbb"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel.tres" id="21_y4ycp"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/status_background.tres" id="22_asdcp"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary_hover.tres" id="23_5ww54"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary.tres" id="24_ifxhw"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_selected.tres" id="25_2vroj"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/tab_selected.tres" id="26_qfbi3"]
-[ext_resource type="StyleBox" path="res://ui/theme/styles/tab.tres" id="27_nmiol"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent_hover.tres" id="1_5jr68"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent.tres" id="2_gol6e"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent_pressed.tres" id="3_7c0c4"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_disabled.tres" id="4_al50p"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_focus.tres" id="5_vofj0"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_hover.tres" id="6_qmyqw"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary.tres" id="7_1reg4"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_pressed.tres" id="8_ecl8w"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger_hover.tres" id="9_sko0m"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger.tres" id="10_rkeqb"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger_pressed.tres" id="11_cigbb"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_dark.tres" id="12_y4ycp"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/role_card_disabled.tres" id="13_asdcp"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_exp.tres" id="14_5ww54"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_energy.tres" id="15_ifxhw"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_hp.tres" id="16_2vroj"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/divider.tres" id="17_qfbi3"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/role_card_hover.tres" id="18_nmiol"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_hover.tres" id="19_3xjyr"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item.tres" id="20_r6fnm"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_selected.tres" id="21_heqjx"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit_focus.tres" id="22_4b8e3"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit.tres" id="23_pxp33"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_locked.tres" id="24_aih57"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/role_card_locked.tres" id="25_2mgea"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_mana.tres" id="26_boqpv"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel.tres" id="27_un0c5"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_background.tres" id="28_guef0"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/role_card.tres" id="29_5yqim"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary_hover.tres" id="30_f6o8x"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary.tres" id="31_c074q"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary_pressed.tres" id="32_77pea"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_selected.tres" id="33_rqxkr"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/role_card_selected.tres" id="34_345mm"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/tab_selected.tres" id="35_qv6nl"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/tab.tres" id="36_tcqx0"]
 
 [resource]
 AccentButton/base_type = &"Button"
-AccentButton/styles/hover = ExtResource("1_pj467")
-AccentButton/styles/normal = ExtResource("2_ruwoc")
+AccentButton/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+AccentButton/colors/font_focus_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+AccentButton/colors/font_hover_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+AccentButton/colors/font_pressed_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+AccentButton/styles/hover = ExtResource("1_5jr68")
+AccentButton/styles/normal = ExtResource("2_gol6e")
+AccentButton/styles/pressed = ExtResource("3_7c0c4")
+AppearanceOption/base_type = &"ItemSlot"
 Button/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 Button/colors/font_disabled_color = Color(0.37254903, 0.38431373, 0.39215687, 1)
 Button/colors/font_focus_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 Button/colors/font_hover_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 Button/colors/font_pressed_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 Button/font_sizes/font_size = 16
-Button/styles/disabled = ExtResource("3_rkcec")
-Button/styles/focus = ExtResource("4_xnygx")
-Button/styles/hover = ExtResource("5_50f6b")
-Button/styles/normal = ExtResource("6_a2xom")
-Button/styles/pressed = ExtResource("7_6g0yv")
+Button/styles/disabled = ExtResource("4_al50p")
+Button/styles/focus = ExtResource("5_vofj0")
+Button/styles/hover = ExtResource("6_qmyqw")
+Button/styles/normal = ExtResource("7_1reg4")
+Button/styles/pressed = ExtResource("8_ecl8w")
 CaptionLabel/base_type = &"Label"
 CaptionLabel/colors/font_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
 CaptionLabel/font_sizes/font_size = 13
 DangerButton/base_type = &"Button"
-DangerButton/styles/hover = ExtResource("8_m7ow8")
-DangerButton/styles/normal = ExtResource("9_dnurm")
+DangerButton/styles/hover = ExtResource("9_sko0m")
+DangerButton/styles/normal = ExtResource("10_rkeqb")
+DangerButton/styles/pressed = ExtResource("11_cigbb")
 DarkLabel/base_type = &"Label"
 DarkLabel/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 DarkLabel/font_sizes/font_size = 16
 DarkPanel/base_type = &"PanelContainer"
-DarkPanel/styles/panel = ExtResource("10_5jr68")
+DarkPanel/styles/panel = ExtResource("12_y4ycp")
+DarkPanelHeading/base_type = &"Label"
+DarkPanelHeading/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+DarkPanelHeading/font_sizes/font_size = 20
 DarkRichText/base_type = &"RichTextLabel"
 DarkRichText/colors/default_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+DisabledRoleCard/base_type = &"Button"
+DisabledRoleCard/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+DisabledRoleCard/styles/disabled = ExtResource("13_asdcp")
+DisabledRoleCard/styles/hover = ExtResource("13_asdcp")
+DisabledRoleCard/styles/normal = ExtResource("13_asdcp")
+DisabledRoleCard/styles/pressed = ExtResource("13_asdcp")
 EXPBar/base_type = &"ProgressBar"
-EXPBar/styles/fill = ExtResource("11_gol6e")
+EXPBar/styles/fill = ExtResource("14_5ww54")
 EnergyBar/base_type = &"ProgressBar"
-EnergyBar/styles/fill = ExtResource("12_7c0c4")
+EnergyBar/styles/fill = ExtResource("15_ifxhw")
+EquippedMarker/base_type = &"Label"
+EquippedMarker/colors/font_color = Color(0.20784314, 0.41568628, 0.5882353, 1)
+EquippedMarker/font_sizes/font_size = 13
 FantasyPanel/base_type = &"PanelContainer"
+GoldDarkLabel/base_type = &"Label"
+GoldDarkLabel/colors/font_color = Color(0.7764706, 0.60784316, 0.29411766, 1)
+GoldDarkLabel/font_sizes/font_size = 16
 HPBar/base_type = &"ProgressBar"
-HPBar/styles/fill = ExtResource("13_al50p")
+HPBar/styles/fill = ExtResource("16_2vroj")
+HSeparator/styles/separator = ExtResource("17_qfbi3")
+HoverRoleCard/base_type = &"Button"
+HoverRoleCard/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+HoverRoleCard/styles/disabled = ExtResource("18_nmiol")
+HoverRoleCard/styles/hover = ExtResource("18_nmiol")
+HoverRoleCard/styles/normal = ExtResource("18_nmiol")
+HoverRoleCard/styles/pressed = ExtResource("18_nmiol")
 ItemSlot/base_type = &"Button"
 ItemSlot/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 ItemSlot/colors/font_hover_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
-ItemSlot/styles/hover = ExtResource("14_vofj0")
-ItemSlot/styles/normal = ExtResource("15_qmyqw")
-ItemSlot/styles/pressed = ExtResource("16_1reg4")
+ItemSlot/styles/hover = ExtResource("19_3xjyr")
+ItemSlot/styles/normal = ExtResource("20_r6fnm")
+ItemSlot/styles/pressed = ExtResource("21_heqjx")
 Label/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 Label/colors/font_outline_color = Color(0.9647059, 0.94509804, 0.9098039, 1)
 Label/constants/outline_size = 1
@@ -77,45 +115,79 @@ LineEdit/colors/caret_color = Color(0.72156864, 0.5372549, 0.23529412, 1)
 LineEdit/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 LineEdit/colors/font_placeholder_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
 LineEdit/font_sizes/font_size = 16
-LineEdit/styles/focus = ExtResource("17_ecl8w")
-LineEdit/styles/normal = ExtResource("18_sko0m")
+LineEdit/styles/focus = ExtResource("22_4b8e3")
+LineEdit/styles/normal = ExtResource("23_pxp33")
+LockedAppearanceOption/base_type = &"AppearanceOption"
+LockedAppearanceOption/styles/disabled = ExtResource("24_aih57")
+LockedAppearanceOption/styles/normal = ExtResource("24_aih57")
 LockedItemSlot/base_type = &"ItemSlot"
-LockedItemSlot/styles/normal = ExtResource("19_rkeqb")
+LockedItemSlot/styles/normal = ExtResource("24_aih57")
+LockedMarker/base_type = &"Label"
+LockedMarker/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+LockedMarker/font_sizes/font_size = 13
+LockedRoleCard/base_type = &"Button"
+LockedRoleCard/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+LockedRoleCard/styles/disabled = ExtResource("25_2mgea")
+LockedRoleCard/styles/hover = ExtResource("25_2mgea")
+LockedRoleCard/styles/normal = ExtResource("25_2mgea")
+LockedRoleCard/styles/pressed = ExtResource("25_2mgea")
 ManaBar/base_type = &"ProgressBar"
-ManaBar/styles/fill = ExtResource("20_cigbb")
-PanelContainer/styles/panel = ExtResource("21_y4ycp")
+ManaBar/styles/fill = ExtResource("26_boqpv")
+PanelContainer/styles/panel = ExtResource("27_un0c5")
 PanelHeading/base_type = &"Label"
 PanelHeading/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 PanelHeading/font_sizes/font_size = 20
 PrimaryButton/base_type = &"Button"
 ProgressBar/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
 ProgressBar/font_sizes/font_size = 14
-ProgressBar/styles/background = ExtResource("22_asdcp")
-ProgressBar/styles/fill = ExtResource("13_al50p")
+ProgressBar/styles/background = ExtResource("28_guef0")
+ProgressBar/styles/fill = ExtResource("16_2vroj")
 RichTextLabel/colors/default_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 RichTextLabel/font_sizes/bold_font_size = 17
 RichTextLabel/font_sizes/normal_font_size = 16
+RoleCard/base_type = &"Button"
+RoleCard/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+RoleCard/styles/disabled = ExtResource("29_5yqim")
+RoleCard/styles/hover = ExtResource("29_5yqim")
+RoleCard/styles/normal = ExtResource("29_5yqim")
+RoleCard/styles/pressed = ExtResource("29_5yqim")
 ScreenHeading/base_type = &"Label"
 ScreenHeading/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 ScreenHeading/font_sizes/font_size = 26
 SecondaryButton/base_type = &"Button"
-SecondaryButton/styles/hover = ExtResource("23_5ww54")
-SecondaryButton/styles/normal = ExtResource("24_ifxhw")
+SecondaryButton/styles/hover = ExtResource("30_f6o8x")
+SecondaryButton/styles/normal = ExtResource("31_c074q")
+SecondaryButton/styles/pressed = ExtResource("32_77pea")
 SecondaryLabel/base_type = &"Label"
 SecondaryLabel/colors/font_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
 SecondaryLabel/font_sizes/font_size = 16
+SelectedAppearanceOption/base_type = &"AppearanceOption"
+SelectedAppearanceOption/styles/normal = ExtResource("21_heqjx")
 SelectedItemSlot/base_type = &"ItemSlot"
-SelectedItemSlot/styles/normal = ExtResource("16_1reg4")
+SelectedItemSlot/styles/normal = ExtResource("21_heqjx")
+SelectedMarker/base_type = &"Label"
+SelectedMarker/colors/font_color = Color(0.7764706, 0.60784316, 0.29411766, 1)
+SelectedMarker/font_sizes/font_size = 16
 SelectedPanel/base_type = &"PanelContainer"
-SelectedPanel/styles/panel = ExtResource("25_2vroj")
+SelectedPanel/styles/panel = ExtResource("33_rqxkr")
+SelectedRoleCard/base_type = &"Button"
+SelectedRoleCard/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+SelectedRoleCard/styles/disabled = ExtResource("34_345mm")
+SelectedRoleCard/styles/hover = ExtResource("34_345mm")
+SelectedRoleCard/styles/normal = ExtResource("34_345mm")
+SelectedRoleCard/styles/pressed = ExtResource("34_345mm")
 SelectedTabButton/base_type = &"TabButton"
 SelectedTabButton/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
-SelectedTabButton/styles/normal = ExtResource("26_qfbi3")
+SelectedTabButton/styles/normal = ExtResource("35_qv6nl")
+StatusLabel/base_type = &"Label"
+StatusLabel/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+StatusLabel/font_sizes/font_size = 14
 TabButton/base_type = &"Button"
 TabButton/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 TabButton/colors/font_hover_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
-TabButton/styles/hover = ExtResource("26_qfbi3")
-TabButton/styles/normal = ExtResource("27_nmiol")
+TabButton/styles/hover = ExtResource("35_qv6nl")
+TabButton/styles/normal = ExtResource("36_tcqx0")
+TabButton/styles/pressed = ExtResource("35_qv6nl")
 TitleLabel/base_type = &"Label"
 TitleLabel/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
 TitleLabel/font_sizes/font_size = 34

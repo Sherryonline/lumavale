@@ -1,7 +1,23 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/tab_button.gd" id="1_tab"]
 
 [node name="TabButton" type="Button"]
 custom_minimum_size = Vector2(112, 40)
 theme_type_variation = &"TabButton"
 toggle_mode = true
 text = "Tab"
+focus_mode = 2
+script = ExtResource("1_tab")
+
+[node name="Indicator" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -4.0
+offset_right = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2

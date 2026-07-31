@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/section_header.gd" id="1_header"]
+
+[node name="SectionHeader" type="VBoxContainer"]
+theme_override_constants/separation = 6
+script = ExtResource("1_header")
+
+[node name="HeadingRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="HeadingRow"]
+visible = false
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Heading" type="Label" parent="HeadingRow"]
+layout_mode = 2
+theme_type_variation = &"PanelHeading"
+text = "Section"
+
+[node name="Divider" type="HSeparator" parent="."]
+layout_mode = 2

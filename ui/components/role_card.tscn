@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://ui/components/role_card.gd" id="1_role"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/lock.svg" id="2_lock"]
+
+[node name="RoleCard" type="Button"]
+custom_minimum_size = Vector2(220, 238)
+theme_type_variation = &"RoleCard"
+focus_mode = 2
+script = ExtResource("1_role")
+lock_icon = ExtResource("2_lock")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Portrait" type="TextureRect" parent="Margin/Content"]
+visible = false
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_filter = 1
+expand_mode = 3
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="RoleName" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"PanelHeading"
+text = "Role"
+horizontal_alignment = 1
+mouse_filter = 2
+
+[node name="Description" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"SecondaryLabel"
+text = "A dependable adventurer."
+horizontal_alignment = 1
+autowrap_mode = 2
+mouse_filter = 2
+
+[node name="Difficulty" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "Difficulty: Balanced"
+horizontal_alignment = 1
+mouse_filter = 2
+
+[node name="LockIndicator" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -19.0
+offset_right = 54.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"DarkPanel"
+mouse_filter = 2
+
+[node name="LockRow" type="HBoxContainer" parent="LockIndicator"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LockIcon" type="TextureRect" parent="LockIndicator/LockRow"]
+visible = false
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="LockIndicator/LockRow"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "LOCKED"
+mouse_filter = 2
+
+[node name="SelectedIndicator" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 36.0
+grow_horizontal = 0
+theme_type_variation = &"SelectedMarker"
+text = "✓"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2

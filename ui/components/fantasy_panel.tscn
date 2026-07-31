@@ -1,8 +1,20 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/fantasy_panel.gd" id="1_panel"]
 
 [node name="FantasyPanel" type="PanelContainer"]
 theme_type_variation = &"FantasyPanel"
+script = ExtResource("1_panel")
 
 [node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Content"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"PanelHeading"
+
+[node name="Body" type="VBoxContainer" parent="Content"]
 layout_mode = 2
 theme_override_constants/separation = 12
