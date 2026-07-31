@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AppearanceItem" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/character/appearance_item.gd" id="1_script"]
+
+[ext_resource type="SpriteFrames" path="res://resources/appearance/shoes_light_frames.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"shoes_light"
+display_name = "Light Shoes"
+category = 5
+sprite_frames = ExtResource("2_frames")
+locked = false
