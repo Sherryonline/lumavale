@@ -6,6 +6,7 @@ signal appearance_option_selected(
 	selection_id: StringName,
 	item: AppearanceItem
 )
+signal role_option_selected(role: RoleData)
 
 const T := preload("res://ui/theme/theme_tokens.gd")
 const ROLE_CARD_SCENE := preload("res://ui/components/role_card.tscn")
@@ -86,6 +87,11 @@ const HAIR_COLORS := [
 	ACCESSORY_LEAF as AppearanceItem,
 	ACCESSORY_BAG as AppearanceItem,
 ]
+@export var roles: Array[RoleData] = [
+	WARRIOR as RoleData,
+	RANGER as RoleData,
+	ALCHEMIST as RoleData,
+]
 
 var selected_body: AppearanceItem
 var selected_skin_color: StringName = &""
@@ -96,13 +102,10 @@ var selected_top: AppearanceItem
 var selected_bottom: AppearanceItem
 var selected_shoes: AppearanceItem
 var selected_accessory: AppearanceItem
+var selected_role: RoleData
 
-var role_resources: Array[RoleData] = [
-	WARRIOR as RoleData,
-	RANGER as RoleData,
-	ALCHEMIST as RoleData,
-]
 var _option_cards: Dictionary = {}
+var _role_cards: Dictionary = {}
 var _random := RandomNumberGenerator.new()
 
 @onready var background_overlay: ColorRect = $BackgroundOverlay
@@ -128,10 +131,9 @@ func _ready() -> void:
 	_apply_presentation_tokens()
 	_initialize_selection_defaults()
 	_connect_signals()
-	_populate_roles()
 	populate_appearance_sections()
 	_initialize_character_preview()
-	_show_role_details(role_resources[0])
+	populate_roles()
 	validate_form()
 	character_name.grab_focus.call_deferred()
 
@@ -146,6 +148,7 @@ func _apply_presentation_tokens() -> void:
 
 func _connect_signals() -> void:
 	appearance_option_selected.connect(select_appearance)
+	role_option_selected.connect(select_role)
 	randomize_button.pressed.connect(randomize_appearance)
 	character_name.text_changed.connect(_on_character_name_changed)
 	character_name.focus_exited.connect(_trim_character_name)
@@ -165,24 +168,116 @@ func _initialize_selection_defaults() -> void:
 		selected_accessory = _first_available_item(accessory_options)
 
 
-func _populate_roles() -> void:
+func populate_roles() -> void:
 	for child: Node in role_list.get_children():
 		child.queue_free()
-	for index: int in role_resources.size():
-		var role_data := role_resources[index]
-		var card := ROLE_CARD_SCENE.instantiate() as LumaRoleCard
-		card.custom_minimum_size = Vector2(0, 238)
-		card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		card.role_name = role_data.display_name
-		card.description = _card_description_for(role_data.id)
-		card.difficulty = role_data.difficulty
-		card.portrait = role_data.portrait if role_data.portrait != null else role_data.icon
-		if not role_data.available:
-			card.card_state = LumaRoleCard.CardState.LOCKED
-		elif index == 0:
-			card.card_state = LumaRoleCard.CardState.SELECTED
-		card.tooltip_text = role_data.description
+	_role_cards.clear()
+	selected_role = null
+	for role_data: RoleData in roles:
+		if role_data == null:
+			continue
+		var card := build_role_card(role_data)
 		role_list.add_child(card)
+		_role_cards[role_data.id] = card
+	var default_role := _default_available_role()
+	if default_role != null:
+		select_role(default_role)
+	else:
+		refresh_role_information()
+		refresh_stats()
+		refresh_starting_weapon()
+		validate_form()
+
+
+func build_role_card(role_data: RoleData) -> LumaRoleCard:
+	var card := ROLE_CARD_SCENE.instantiate() as LumaRoleCard
+	card.custom_minimum_size = Vector2(0, 238)
+	card.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	card.role_name = role_data.display_name
+	card.description = (
+		_card_description_for(role_data.id)
+		if role_data.available
+		else "Coming Soon"
+	)
+	card.difficulty = role_data.difficulty
+	card.portrait = role_data.portrait if role_data.portrait != null else role_data.icon
+	card.card_state = (
+		LumaRoleCard.CardState.NORMAL
+		if role_data.available
+		else LumaRoleCard.CardState.LOCKED
+	)
+	card.tooltip_text = (
+		role_data.description
+		if role_data.available
+		else "%s is unavailable. Coming Soon." % role_data.display_name
+	)
+	card.set_meta(&"role_id", role_data.id)
+	card.set_meta(&"role_data", role_data)
+	card.pressed.connect(_emit_role_selection.bind(role_data))
+	return card
+
+
+func select_role(role_data: RoleData) -> void:
+	if role_data == null or not role_data.available:
+		return
+	selected_role = role_data
+	for role_id_variant: Variant in _role_cards:
+		var role_id := role_id_variant as StringName
+		var card := _role_cards[role_id] as LumaRoleCard
+		var registered_role := _find_role(role_id)
+		if card == null or registered_role == null:
+			continue
+		if not registered_role.available:
+			card.card_state = LumaRoleCard.CardState.LOCKED
+		elif role_id == selected_role.id:
+			card.card_state = LumaRoleCard.CardState.SELECTED
+		else:
+			card.card_state = LumaRoleCard.CardState.NORMAL
+	refresh_role_information()
+	refresh_stats()
+	refresh_starting_weapon()
+	validate_form()
+
+
+func refresh_role_information() -> void:
+	if selected_role == null:
+		selected_role_label.text = "No role selected"
+		role_description.text = "Choose an available role to continue."
+		role_strengths.text = ""
+		return
+	selected_role_label.text = selected_role.display_name
+	role_description.text = selected_role.description
+	role_strengths.text = _strengths_for(selected_role.id)
+
+
+func refresh_stats() -> void:
+	for child: Node in stats_container.get_children():
+		child.queue_free()
+	if selected_role == null:
+		return
+	var values := {
+		"HP": selected_role.hp,
+		"Attack": selected_role.attack,
+		"Defense": selected_role.defense,
+		"Speed": selected_role.speed,
+		"Energy": selected_role.energy,
+	}
+	for stat_name: String in values:
+		var name_label := Label.new()
+		name_label.theme_type_variation = &"SecondaryLabel"
+		name_label.text = stat_name
+		stats_container.add_child(name_label)
+		var value_label := Label.new()
+		value_label.theme_type_variation = &"PanelHeading"
+		value_label.text = str(values[stat_name])
+		value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		stats_container.add_child(value_label)
+
+
+func refresh_starting_weapon() -> void:
+	preview_character.set_weapon(
+		selected_role.starting_weapon if selected_role != null else null
+	)
 
 
 func populate_appearance_sections() -> void:
@@ -346,6 +441,7 @@ func validate_name() -> bool:
 
 func validate_form() -> bool:
 	var name_is_valid := validate_name()
+	var role_is_valid := selected_role != null and selected_role.available
 	var appearance_is_valid := (
 		selected_body != null
 		and not selected_skin_color.is_empty()
@@ -357,13 +453,12 @@ func validate_form() -> bool:
 		and selected_shoes != null
 		and selected_accessory != null
 	)
-	var form_is_valid := name_is_valid and appearance_is_valid
+	var form_is_valid := name_is_valid and role_is_valid and appearance_is_valid
 	confirm_button.disabled = not form_is_valid
 	return form_is_valid
 
 
 func _initialize_character_preview() -> void:
-	preview_character.set_weapon(WARRIOR.starting_weapon)
 	update_preview(&"all")
 	preview_character.play_animation(&"idle_down")
 
@@ -438,6 +533,10 @@ func _emit_option_selection(
 	item: AppearanceItem
 ) -> void:
 	appearance_option_selected.emit(category, selection_id, item)
+
+
+func _emit_role_selection(role_data: RoleData) -> void:
+	role_option_selected.emit(role_data)
 
 
 func _on_character_name_changed(_new_text: String) -> void:
@@ -585,42 +684,31 @@ func _asset_folder_for(category: AppearanceItem.Category) -> String:
 			return "body"
 
 
-func _show_role_details(role_data: RoleData) -> void:
-	selected_role_label.text = role_data.display_name
-	role_description.text = role_data.description
-	role_strengths.text = "Strengths: %s" % _strengths_for(role_data.id)
-	_fill_stats(role_data)
-
-
-func _fill_stats(role_data: RoleData) -> void:
-	for child: Node in stats_container.get_children():
-		child.queue_free()
-	var values := {
-		"HP": role_data.hp,
-		"Attack": role_data.attack,
-		"Defense": role_data.defense,
-		"Speed": role_data.speed,
-		"Energy": role_data.energy,
-	}
-	for stat_name: String in values:
-		var name_label := Label.new()
-		name_label.theme_type_variation = &"SecondaryLabel"
-		name_label.text = stat_name
-		stats_container.add_child(name_label)
-		var value_label := Label.new()
-		value_label.text = str(values[stat_name])
-		value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		stats_container.add_child(value_label)
-
-
 func _strengths_for(role_id: StringName) -> String:
 	match role_id:
 		&"ranger":
-			return "Precision, mobility, ranged pressure"
+			return "Strengths:\n- High Speed\n- Ranged\n- Precision"
 		&"alchemist":
-			return "Energy, support, utility"
+			return "Strengths:\n- High Energy\n- Support\n- Potions"
 		_:
-			return "Vitality, defense, melee reliability"
+			return "Strengths:\n- High HP\n- High Defense\n- Melee"
+
+
+func _default_available_role() -> RoleData:
+	var warrior := _find_role(&"warrior")
+	if warrior != null and warrior.available:
+		return warrior
+	for role_data: RoleData in roles:
+		if role_data != null and role_data.available:
+			return role_data
+	return null
+
+
+func _find_role(role_id: StringName) -> RoleData:
+	for role_data: RoleData in roles:
+		if role_data != null and role_data.id == role_id:
+			return role_data
+	return null
 
 
 func _card_description_for(role_id: StringName) -> String:
