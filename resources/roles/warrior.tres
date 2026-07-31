@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="RoleData" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/character/role_data.gd" id="1_role"]
+[ext_resource type="Texture2D" path="res://assets/characters/weapons/sword.svg" id="2_icon"]
+[ext_resource type="AppearanceItem" path="res://resources/appearance/weapon_sword.tres" id="3_weapon"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icon"]
+atlas = ExtResource("2_icon")
+region = Rect2(0, 0, 48, 64)
+
+[resource]
+script = ExtResource("1_role")
+id = &"warrior"
+display_name = "Warrior"
+description = "A resilient frontline adventurer with dependable melee strength."
+icon = SubResource("AtlasTexture_icon")
+portrait = SubResource("AtlasTexture_icon")
+hp = 120
+attack = 16
+defense = 14
+speed = 95
+energy = 100
+difficulty = "Beginner"
+starting_weapon = ExtResource("3_weapon")
+available = true

@@ -17,4 +17,5 @@ theme_type_variation = &"PanelHeading"
 
 [node name="Body" type="VBoxContainer" parent="Content"]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 12

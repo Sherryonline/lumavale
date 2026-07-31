@@ -1,0 +1,310 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://ui/screens/character_selection_v2.gd" id="1_screen"]
+[ext_resource type="Texture2D" path="res://assets/ui/backgrounds/character_selection_v2.svg" id="2_background"]
+[ext_resource type="PackedScene" path="res://ui/components/fantasy_panel.tscn" id="3_panel"]
+[ext_resource type="PackedScene" path="res://scenes/character/modular_character.tscn" id="4_character"]
+[ext_resource type="PackedScene" path="res://ui/components/secondary_button.tscn" id="5_secondary"]
+[ext_resource type="PackedScene" path="res://ui/components/accent_button.tscn" id="6_accent"]
+[ext_resource type="PackedScene" path="res://ui/components/section_header.tscn" id="7_header"]
+
+[node name="CharacterSelectionV2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_screen")
+
+[node name="EnvironmentBackground" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackgroundOverlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SafeArea" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 12.0
+offset_right = -14.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MainVBox" type="VBoxContainer" parent="SafeArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Header" type="PanelContainer" parent="SafeArea/MainVBox"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_type_variation = &"DarkPanel"
+
+[node name="HeaderContent" type="HFlowContainer" parent="SafeArea/MainVBox/Header"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Identity" type="VBoxContainer" parent="SafeArea/MainVBox/Header/HeaderContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent/Identity"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 28
+text = "LumaVale"
+
+[node name="Subtitle" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent/Identity"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Create Your Adventurer"
+
+[node name="Progress" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent"]
+layout_mode = 2
+theme_type_variation = &"GoldDarkLabel"
+text = "Choose Role  •  Customize  •  Confirm"
+vertical_alignment = 1
+
+[node name="MainContent" type="HFlowContainer" parent="SafeArea/MainVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="RoleSection" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent"]
+custom_minimum_size = Vector2(210, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="RolePanel" parent="SafeArea/MainVBox/MainContent/RoleSection" instance=ExtResource("3_panel")]
+layout_mode = 2
+size_flags_vertical = 3
+title = "Choose Your Role"
+
+[node name="RoleScroll" type="ScrollContainer" parent="SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="RoleList" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CharacterPreviewSection" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="PreviewPanel" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection" instance=ExtResource("3_panel")]
+layout_mode = 2
+size_flags_vertical = 3
+title = "Character Preview"
+
+[node name="PreviewViewportContainer" type="SubViewportContainer" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body"]
+custom_minimum_size = Vector2(0, 215)
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="PreviewViewport" type="SubViewport" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer"]
+transparent_bg = false
+handle_input_locally = false
+size = Vector2i(360, 280)
+render_target_update_mode = 4
+
+[node name="PreviewBackdrop" type="TextureRect" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PreviewTint" type="ColorRect" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PreviewWorld" type="Node2D" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport"]
+
+[node name="FloorShadow" type="Polygon2D" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld"]
+unique_name_in_owner = true
+position = Vector2(180, 225)
+polygon = PackedVector2Array(-58, 0, -42, -13, 0, -19, 42, -13, 58, 0, 42, 13, 0, 19, -42, 13)
+
+[node name="PreviewCharacter" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld" instance=ExtResource("4_character")]
+unique_name_in_owner = true
+position = Vector2(180, 190)
+scale = Vector2(3.2, 3.2)
+
+[node name="AnimationControls" type="HBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="IdleButton" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls" instance=ExtResource("5_secondary")]
+custom_minimum_size = Vector2(84, 40)
+layout_mode = 2
+text = "Idle"
+
+[node name="WalkButton" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls" instance=ExtResource("5_secondary")]
+custom_minimum_size = Vector2(84, 40)
+layout_mode = 2
+text = "Walk"
+
+[node name="AttackButton" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls" instance=ExtResource("5_secondary")]
+custom_minimum_size = Vector2(84, 40)
+layout_mode = 2
+text = "Attack"
+
+[node name="CharacterInfoSection" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="InfoPanel" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection" instance=ExtResource("3_panel")]
+layout_mode = 2
+size_flags_vertical = 3
+title = "Character Details"
+
+[node name="InfoScroll" type="ScrollContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CharacterInfoVBox" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="NameHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
+layout_mode = 2
+heading = "Character Name"
+
+[node name="CharacterName" type="LineEdit" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+placeholder_text = "Enter a name to continue"
+max_length = 16
+
+[node name="RoleHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
+layout_mode = 2
+heading = "Selected Role"
+
+[node name="SelectedRole" type="Label" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PanelHeading"
+text = "Warrior"
+
+[node name="RoleDescription" type="Label" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SecondaryLabel"
+text = "A resilient frontline adventurer."
+autowrap_mode = 2
+
+[node name="RoleStrengths" type="Label" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Strengths: Vitality, defense, melee reliability"
+autowrap_mode = 2
+
+[node name="StatsHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
+layout_mode = 2
+heading = "Starting Stats"
+
+[node name="StatsContainer" type="GridContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="AppearanceHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
+layout_mode = 2
+heading = "Appearance"
+
+[node name="AppearanceList" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FooterActions" type="HFlowContainer" parent="SafeArea/MainVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="BackButton" parent="SafeArea/MainVBox/FooterActions" instance=ExtResource("5_secondary")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(132, 44)
+layout_mode = 2
+text = "Back"
+
+[node name="RandomizeButton" parent="SafeArea/MainVBox/FooterActions" instance=ExtResource("5_secondary")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(142, 44)
+layout_mode = 2
+text = "Randomize"
+
+[node name="ConfirmButton" parent="SafeArea/MainVBox/FooterActions" instance=ExtResource("6_accent")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 44)
+layout_mode = 2
+disabled = true
+text = "Confirm Character"
+
+[node name="TooltipLayer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TransitionLayer" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
