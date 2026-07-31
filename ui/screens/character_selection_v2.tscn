@@ -222,6 +222,13 @@ layout_mode = 2
 placeholder_text = "Enter a name to continue"
 max_length = 16
 
+[node name="NameValidationMessage" type="Label" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"CaptionLabel"
+text = "Character name is required."
+autowrap_mode = 2
+
 [node name="RoleHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
 layout_mode = 2
 heading = "Selected Role"
