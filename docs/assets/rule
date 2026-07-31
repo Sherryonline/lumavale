@@ -1,4 +1,0 @@
-Quy tắc
-Không thêm asset vào project nếu chưa ghi vào asset-registry.csv.
-Luôn lưu URL gốc để kiểm tra license sau này.
-Nếu chỉnh sửa asset (đổi màu, ghép tile...), đặt Modified = Yes.
