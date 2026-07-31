@@ -12,6 +12,9 @@ const T := preload("res://ui/theme/theme_tokens.gd")
 const ROLE_CARD_SCENE := preload("res://ui/components/role_card.tscn")
 const APPEARANCE_OPTION_SCENE := preload("res://ui/components/appearance_option.tscn")
 const SECTION_HEADER_SCENE := preload("res://ui/components/section_header.tscn")
+const MAIN_SCENE_PATH := "res://scenes/main.tscn"
+const BACK_SCENE_PATH := "res://scenes/character_creation.tscn"
+const TRANSITION_DURATION := 0.20
 
 const WARRIOR := preload("res://resources/roles/warrior.tres")
 const RANGER := preload("res://resources/roles/ranger.tres")
@@ -107,6 +110,7 @@ var selected_role: RoleData
 var _option_cards: Dictionary = {}
 var _role_cards: Dictionary = {}
 var _random := RandomNumberGenerator.new()
+var _transitioning: bool = false
 
 @onready var background_overlay: ColorRect = $BackgroundOverlay
 @onready var preview_tint: ColorRect = %PreviewTint
@@ -142,7 +146,7 @@ func _apply_presentation_tokens() -> void:
 	background_overlay.color = Color(T.BACKGROUND_DEEP, 0.12)
 	preview_tint.color = Color(T.SURFACE_PRIMARY, 0.16)
 	floor_shadow.color = T.SHADOW
-	transition_layer.color = T.BACKGROUND_DEEP
+	transition_layer.color = Color(T.BACKGROUND_DEEP, 0.0)
 	name_validation_message.add_theme_color_override(&"font_color", T.DANGER)
 
 
@@ -150,6 +154,8 @@ func _connect_signals() -> void:
 	appearance_option_selected.connect(select_appearance)
 	role_option_selected.connect(select_role)
 	randomize_button.pressed.connect(randomize_appearance)
+	confirm_button.pressed.connect(_on_confirm_pressed)
+	%BackButton.pressed.connect(_on_back_pressed)
 	character_name.text_changed.connect(_on_character_name_changed)
 	character_name.focus_exited.connect(_trim_character_name)
 
@@ -458,6 +464,32 @@ func validate_form() -> bool:
 	return form_is_valid
 
 
+func build_character_data() -> Dictionary:
+	if not validate_form():
+		return {}
+	return {
+		"name": character_name.text.strip_edges(),
+		"role": String(selected_role.id),
+		"body": String(selected_body.id),
+		"skin_color": String(selected_skin_color),
+		"hair": String(selected_hair.id),
+		"hair_color": String(selected_hair_color),
+		"eyes": String(selected_eyes.id),
+		"top": String(selected_top.id),
+		"bottom": String(selected_bottom.id),
+		"shoes": String(selected_shoes.id),
+		"accessory": String(selected_accessory.id),
+		"weapon": String(selected_role.starting_weapon.id),
+		"stats": {
+			"hp": selected_role.hp,
+			"attack": selected_role.attack,
+			"defense": selected_role.defense,
+			"speed": selected_role.speed,
+			"energy": selected_role.energy,
+		},
+	}
+
+
 func _initialize_character_preview() -> void:
 	update_preview(&"all")
 	preview_character.play_animation(&"idle_down")
@@ -541,6 +573,54 @@ func _emit_role_selection(role_data: RoleData) -> void:
 
 func _on_character_name_changed(_new_text: String) -> void:
 	validate_form()
+
+
+func _on_confirm_pressed() -> void:
+	if _transitioning:
+		return
+	_trim_character_name()
+	var data := build_character_data()
+	if data.is_empty():
+		character_name.grab_focus()
+		return
+	GameSession.set_character_data(data)
+	_transition_to_scene(MAIN_SCENE_PATH)
+
+
+func _on_back_pressed() -> void:
+	if _transitioning:
+		return
+	_transition_to_scene(BACK_SCENE_PATH)
+
+
+func _transition_to_scene(scene_path: String) -> void:
+	_transitioning = true
+	confirm_button.disabled = true
+	%BackButton.disabled = true
+	transition_layer.visible = true
+	transition_layer.color = Color(T.BACKGROUND_DEEP, 0.0)
+
+	if not ThemeManager.reduced_motion:
+		var tween := create_tween()
+		tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		tween.tween_property(
+			transition_layer,
+			"color:a",
+			1.0,
+			TRANSITION_DURATION
+		)
+		await tween.finished
+	else:
+		transition_layer.color.a = 1.0
+		await get_tree().process_frame
+
+	var change_error := get_tree().change_scene_to_file(scene_path)
+	if change_error != OK:
+		push_error("Unable to change scene to %s (error %s)." % [scene_path, change_error])
+		_transitioning = false
+		transition_layer.visible = false
+		%BackButton.disabled = false
+		validate_form()
 
 
 func _trim_character_name() -> void:

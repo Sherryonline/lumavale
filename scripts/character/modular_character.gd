@@ -82,6 +82,17 @@ func stop_animation() -> void:
 	_sync_visible_layers()
 
 
+func has_animation(animation_name: StringName) -> bool:
+	for layer: AnimatedSprite2D in _layers:
+		if (
+			layer.sprite_frames != null
+			and layer.sprite_frames.has_animation(animation_name)
+			and layer.sprite_frames.get_frame_count(animation_name) > 0
+		):
+			return true
+	return false
+
+
 func set_body(item: AppearanceItem) -> void:
 	_set_single_layer(body, item)
 
