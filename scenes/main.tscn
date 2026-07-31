@@ -1,17 +1,17 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://yshg8klpuaqw"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cva22kp4y5ld3" path="res://scripts/main.gd" id="1_main"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1269104259]
 script = ExtResource("1_main")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1578705766]
 offset_right = 480.0
 offset_bottom = 270.0
 mouse_filter = 2
 color = Color(0.141176, 0.235294, 0.207843, 1)
 
-[node name="Title" type="Label" parent="."]
+[node name="Title" type="Label" parent="." unique_id=1809302624]
 offset_left = 140.0
 offset_top = 108.0
 offset_right = 340.0
@@ -21,7 +21,7 @@ theme_override_font_sizes/font_size = 28
 text = "LumaVale"
 horizontal_alignment = 1
 
-[node name="Status" type="Label" parent="."]
+[node name="Status" type="Label" parent="." unique_id=1255329540]
 offset_left = 140.0
 offset_top = 145.0
 offset_right = 340.0
