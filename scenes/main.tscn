@@ -5,28 +5,42 @@
 [node name="Main" type="Node" unique_id=1269104259]
 script = ExtResource("1_main")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1578705766]
-offset_right = 480.0
-offset_bottom = 270.0
+[node name="WorldContainer" type="Node2D" parent="." unique_id=1578705766]
+y_sort_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1809302624]
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1255329540]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
-color = Color(0.141176, 0.235294, 0.207843, 1)
 
-[node name="Title" type="Label" parent="." unique_id=1809302624]
-offset_left = 140.0
-offset_top = 108.0
-offset_right = 340.0
-offset_bottom = 140.0
-theme_override_colors/font_color = Color(0.968627, 0.929412, 0.811765, 1)
-theme_override_font_sizes/font_size = 28
-text = "LumaVale"
-horizontal_alignment = 1
+[node name="SceneTransition" type="CanvasLayer" parent="." unique_id=1492428773]
+layer = 100
 
-[node name="Status" type="Label" parent="." unique_id=1255329540]
-offset_left = 140.0
-offset_top = 145.0
-offset_right = 340.0
-offset_bottom = 165.0
+[node name="Fade" type="ColorRect" parent="SceneTransition" unique_id=2034449229]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="DebugOverlay" type="CanvasLayer" parent="." unique_id=834841977]
+visible = false
+layer = 200
+
+[node name="Label" type="Label" parent="DebugOverlay" unique_id=2058111787]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 220.0
+offset_bottom = 38.0
 theme_override_colors/font_color = Color(0.72549, 0.847059, 0.705882, 1)
-theme_override_font_sizes/font_size = 12
-text = "Godot foundation ready"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+text = "LumaVale Debug"
