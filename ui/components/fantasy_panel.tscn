@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[node name="FantasyPanel" type="PanelContainer"]
+theme_type_variation = &"FantasyPanel"
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12

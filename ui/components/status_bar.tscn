@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/status_bar.gd" id="1_status"]
+
+[node name="StatusBar" type="ProgressBar"]
+custom_minimum_size = Vector2(220, 22)
+theme_type_variation = &"HPBar"
+value = 75.0
+script = ExtResource("1_status")

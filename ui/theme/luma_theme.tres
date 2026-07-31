@@ -1,0 +1,122 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent_hover.tres" id="1_pj467"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_accent.tres" id="2_ruwoc"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_disabled.tres" id="3_rkcec"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_focus.tres" id="4_xnygx"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_hover.tres" id="5_50f6b"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary.tres" id="6_a2xom"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_primary_pressed.tres" id="7_6g0yv"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger_hover.tres" id="8_m7ow8"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_danger.tres" id="9_dnurm"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_dark.tres" id="10_5jr68"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_exp.tres" id="11_gol6e"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_energy.tres" id="12_7c0c4"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_hp.tres" id="13_al50p"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_hover.tres" id="14_vofj0"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item.tres" id="15_qmyqw"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_selected.tres" id="16_1reg4"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit_focus.tres" id="17_ecl8w"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/line_edit.tres" id="18_sko0m"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/item_locked.tres" id="19_rkeqb"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_mana.tres" id="20_cigbb"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel.tres" id="21_y4ycp"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/status_background.tres" id="22_asdcp"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary_hover.tres" id="23_5ww54"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/button_secondary.tres" id="24_ifxhw"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/panel_selected.tres" id="25_2vroj"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/tab_selected.tres" id="26_qfbi3"]
+[ext_resource type="StyleBox" path="res://ui/theme/styles/tab.tres" id="27_nmiol"]
+
+[resource]
+AccentButton/base_type = &"Button"
+AccentButton/styles/hover = ExtResource("1_pj467")
+AccentButton/styles/normal = ExtResource("2_ruwoc")
+Button/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+Button/colors/font_disabled_color = Color(0.37254903, 0.38431373, 0.39215687, 1)
+Button/colors/font_focus_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+Button/colors/font_hover_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+Button/colors/font_pressed_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+Button/font_sizes/font_size = 16
+Button/styles/disabled = ExtResource("3_rkcec")
+Button/styles/focus = ExtResource("4_xnygx")
+Button/styles/hover = ExtResource("5_50f6b")
+Button/styles/normal = ExtResource("6_a2xom")
+Button/styles/pressed = ExtResource("7_6g0yv")
+CaptionLabel/base_type = &"Label"
+CaptionLabel/colors/font_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
+CaptionLabel/font_sizes/font_size = 13
+DangerButton/base_type = &"Button"
+DangerButton/styles/hover = ExtResource("8_m7ow8")
+DangerButton/styles/normal = ExtResource("9_dnurm")
+DarkLabel/base_type = &"Label"
+DarkLabel/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+DarkLabel/font_sizes/font_size = 16
+DarkPanel/base_type = &"PanelContainer"
+DarkPanel/styles/panel = ExtResource("10_5jr68")
+DarkRichText/base_type = &"RichTextLabel"
+DarkRichText/colors/default_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+EXPBar/base_type = &"ProgressBar"
+EXPBar/styles/fill = ExtResource("11_gol6e")
+EnergyBar/base_type = &"ProgressBar"
+EnergyBar/styles/fill = ExtResource("12_7c0c4")
+FantasyPanel/base_type = &"PanelContainer"
+HPBar/base_type = &"ProgressBar"
+HPBar/styles/fill = ExtResource("13_al50p")
+ItemSlot/base_type = &"Button"
+ItemSlot/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+ItemSlot/colors/font_hover_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+ItemSlot/styles/hover = ExtResource("14_vofj0")
+ItemSlot/styles/normal = ExtResource("15_qmyqw")
+ItemSlot/styles/pressed = ExtResource("16_1reg4")
+Label/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+Label/colors/font_outline_color = Color(0.9647059, 0.94509804, 0.9098039, 1)
+Label/constants/outline_size = 1
+Label/font_sizes/font_size = 16
+LineEdit/colors/caret_color = Color(0.72156864, 0.5372549, 0.23529412, 1)
+LineEdit/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+LineEdit/colors/font_placeholder_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
+LineEdit/font_sizes/font_size = 16
+LineEdit/styles/focus = ExtResource("17_ecl8w")
+LineEdit/styles/normal = ExtResource("18_sko0m")
+LockedItemSlot/base_type = &"ItemSlot"
+LockedItemSlot/styles/normal = ExtResource("19_rkeqb")
+ManaBar/base_type = &"ProgressBar"
+ManaBar/styles/fill = ExtResource("20_cigbb")
+PanelContainer/styles/panel = ExtResource("21_y4ycp")
+PanelHeading/base_type = &"Label"
+PanelHeading/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+PanelHeading/font_sizes/font_size = 20
+PrimaryButton/base_type = &"Button"
+ProgressBar/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+ProgressBar/font_sizes/font_size = 14
+ProgressBar/styles/background = ExtResource("22_asdcp")
+ProgressBar/styles/fill = ExtResource("13_al50p")
+RichTextLabel/colors/default_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+RichTextLabel/font_sizes/bold_font_size = 17
+RichTextLabel/font_sizes/normal_font_size = 16
+ScreenHeading/base_type = &"Label"
+ScreenHeading/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+ScreenHeading/font_sizes/font_size = 26
+SecondaryButton/base_type = &"Button"
+SecondaryButton/styles/hover = ExtResource("23_5ww54")
+SecondaryButton/styles/normal = ExtResource("24_ifxhw")
+SecondaryLabel/base_type = &"Label"
+SecondaryLabel/colors/font_color = Color(0.38431373, 0.40392157, 0.42352942, 1)
+SecondaryLabel/font_sizes/font_size = 16
+SelectedItemSlot/base_type = &"ItemSlot"
+SelectedItemSlot/styles/normal = ExtResource("16_1reg4")
+SelectedPanel/base_type = &"PanelContainer"
+SelectedPanel/styles/panel = ExtResource("25_2vroj")
+SelectedTabButton/base_type = &"TabButton"
+SelectedTabButton/colors/font_color = Color(0.95686275, 0.9411765, 0.9098039, 1)
+SelectedTabButton/styles/normal = ExtResource("26_qfbi3")
+TabButton/base_type = &"Button"
+TabButton/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+TabButton/colors/font_hover_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+TabButton/styles/hover = ExtResource("26_qfbi3")
+TabButton/styles/normal = ExtResource("27_nmiol")
+TitleLabel/base_type = &"Label"
+TitleLabel/colors/font_color = Color(0.14509805, 0.16862746, 0.19215687, 1)
+TitleLabel/font_sizes/font_size = 34
+TooltipPanel/base_type = &"DarkPanel"

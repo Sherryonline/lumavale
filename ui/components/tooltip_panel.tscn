@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[node name="TooltipPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(280, 0)
+theme_type_variation = &"TooltipPanel"
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="ItemName" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Forest Sword"
+
+[node name="TypeAndRarity" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Weapon • Rare"
+
+[node name="Description" type="RichTextLabel" parent="Content"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+theme_type_variation = &"DarkRichText"
+bbcode_enabled = true
+text = "A balanced blade issued to new LumaVale adventurers."
+fit_content = true
+
+[node name="Stats" type="Label" parent="Content"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Attack +12\nRequired Level 1\nSell Value 45"

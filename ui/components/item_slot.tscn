@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/components/item_slot.gd" id="1_slot"]
+
+[node name="ItemSlot" type="Button"]
+custom_minimum_size = Vector2(56, 56)
+theme_type_variation = &"ItemSlot"
+text = "Item"
+script = ExtResource("1_slot")
+
+[node name="RarityMarker" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+offset_right = 56.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -24.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"CaptionLabel"
+horizontal_alignment = 2
+
+[node name="Equipped" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 22.0
+theme_type_variation = &"CaptionLabel"
+text = "E"
