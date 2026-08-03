@@ -1,12 +1,19 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://ui/screens/character_selection_v2.gd" id="1_screen"]
 [ext_resource type="Texture2D" path="res://assets/ui/backgrounds/character_selection_v2.svg" id="2_background"]
-[ext_resource type="PackedScene" path="res://ui/components/fantasy_panel.tscn" id="3_panel"]
+[ext_resource type="PackedScene" path="res://ui/components/panel/fantasy_panel.tscn" id="3_panel"]
 [ext_resource type="PackedScene" path="res://scenes/character/modular_character.tscn" id="4_character"]
-[ext_resource type="PackedScene" path="res://ui/components/secondary_button.tscn" id="5_secondary"]
-[ext_resource type="PackedScene" path="res://ui/components/accent_button.tscn" id="6_accent"]
-[ext_resource type="PackedScene" path="res://ui/components/section_header.tscn" id="7_header"]
+[ext_resource type="PackedScene" path="res://ui/components/button/secondary_button.tscn" id="5_secondary"]
+[ext_resource type="PackedScene" path="res://ui/components/button/accent_button.tscn" id="6_accent"]
+[ext_resource type="PackedScene" path="res://ui/components/navigation/section_header.tscn" id="7_header"]
+
+[sub_resource type="Gradient" id="Gradient_preview"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 0.945098, 0.74902, 0.65, 1, 0.945098, 0.74902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_preview"]
+gradient = SubResource("Gradient_preview")
 
 [node name="CharacterSelectionV2" type="Control"]
 layout_mode = 3
@@ -165,6 +172,24 @@ mouse_filter = 2
 
 [node name="PreviewWorld" type="Node2D" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport"]
 
+[node name="AmbientParticles" type="CPUParticles2D" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld"]
+unique_name_in_owner = true
+position = Vector2(180, 120)
+amount = 18
+lifetime = 4.0
+preprocess = 4.0
+speed_scale = 0.45
+emission_shape = 3
+emission_rect_extents = Vector2(150, 90)
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, -4)
+initial_velocity_min = 3.0
+initial_velocity_max = 9.0
+scale_amount_min = 1.2
+scale_amount_max = 2.6
+color_ramp = SubResource("GradientTexture_preview")
+
 [node name="FloorShadow" type="Polygon2D" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld"]
 unique_name_in_owner = true
 position = Vector2(180, 225)
@@ -264,12 +289,10 @@ autowrap_mode = 2
 layout_mode = 2
 heading = "Starting Stats"
 
-[node name="StatsContainer" type="GridContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
+[node name="StatsContainer" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/h_separation = 18
-theme_override_constants/v_separation = 5
-columns = 2
+theme_override_constants/separation = 8
 
 [node name="AppearanceHeader" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox" instance=ExtResource("7_header")]
 layout_mode = 2

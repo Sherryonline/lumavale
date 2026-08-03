@@ -9,9 +9,10 @@ signal appearance_option_selected(
 signal role_option_selected(role: RoleData)
 
 const T := preload("res://ui/theme/theme_tokens.gd")
-const ROLE_CARD_SCENE := preload("res://ui/components/role_card.tscn")
-const APPEARANCE_OPTION_SCENE := preload("res://ui/components/appearance_option.tscn")
-const SECTION_HEADER_SCENE := preload("res://ui/components/section_header.tscn")
+const ROLE_CARD_SCENE := preload("res://ui/components/card/role_card.tscn")
+const APPEARANCE_OPTION_SCENE := preload("res://ui/components/card/appearance_card.tscn")
+const SECTION_HEADER_SCENE := preload("res://ui/components/navigation/section_header.tscn")
+const STATUS_BAR_SCENE := preload("res://ui/components/progress/progress_bar.tscn")
 const MAIN_SCENE_PATH := "res://scenes/main.tscn"
 const BACK_SCENE_PATH := "res://archive/character_creation.tscn"
 const TRANSITION_DURATION := 0.20
@@ -154,7 +155,7 @@ var _transitioning: bool = false
 @onready var character_name: LineEdit = %CharacterName
 @onready var name_validation_message: Label = %NameValidationMessage
 @onready var appearance_list: VBoxContainer = %AppearanceList
-@onready var stats_container: GridContainer = %StatsContainer
+@onready var stats_container: VBoxContainer = %StatsContainer
 @onready var role_description: Label = %RoleDescription
 @onready var selected_role_label: Label = %SelectedRole
 @onready var role_strengths: Label = %RoleStrengths
@@ -302,23 +303,22 @@ func refresh_stats() -> void:
 		child.queue_free()
 	if selected_role == null:
 		return
-	var values := {
-		"HP": selected_role.hp,
-		"Attack": selected_role.attack,
-		"Defense": selected_role.defense,
-		"Speed": selected_role.speed,
-		"Energy": selected_role.energy,
-	}
-	for stat_name: String in values:
-		var name_label := Label.new()
-		name_label.theme_type_variation = &"SecondaryLabel"
-		name_label.text = stat_name
-		stats_container.add_child(name_label)
-		var value_label := Label.new()
-		value_label.theme_type_variation = &"PanelHeading"
-		value_label.text = str(values[stat_name])
-		value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		stats_container.add_child(value_label)
+	var stats: Array[Dictionary] = [
+		{"name": "HP", "value": selected_role.hp, "max": 120.0, "variant": LumaStatusBar.Variant.HP},
+		{"name": "Attack", "value": selected_role.attack, "max": 20.0, "variant": LumaStatusBar.Variant.EXP},
+		{"name": "Defense", "value": selected_role.defense, "max": 20.0, "variant": LumaStatusBar.Variant.ENERGY},
+		{"name": "Speed", "value": selected_role.speed, "max": 20.0, "variant": LumaStatusBar.Variant.EXP},
+		{"name": "Energy", "value": selected_role.energy, "max": 120.0, "variant": LumaStatusBar.Variant.ENERGY},
+	]
+	for stat: Dictionary in stats:
+		var bar := STATUS_BAR_SCENE.instantiate() as LumaStatusBar
+		bar.label_text = stat["name"] as String
+		bar.max_value = stat["max"] as float
+		bar.value = stat["value"] as float
+		bar.target_value = stat["value"] as float
+		bar.variant = stat["variant"] as LumaStatusBar.Variant
+		bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		stats_container.add_child(bar)
 
 
 func refresh_starting_weapon() -> void:
@@ -459,11 +459,8 @@ func update_preview(category: StringName = &"all") -> void:
 
 
 func randomize_appearance() -> void:
-	selected_body = _random_available_item(body_options, selected_body)
-	selected_skin_color = _random_available_color_id(SKIN_COLORS, selected_skin_color)
 	selected_hair = _random_available_item(hair_options, selected_hair)
 	selected_hair_color = _random_available_color_id(HAIR_COLORS, selected_hair_color)
-	selected_eyes = _random_available_item(eye_options, selected_eyes)
 	selected_top = _random_available_item(top_options, selected_top)
 	selected_bottom = _random_available_item(bottom_options, selected_bottom)
 	selected_shoes = _random_available_item(shoe_options, selected_shoes)
