@@ -174,6 +174,7 @@ polygon = PackedVector2Array(-58, 0, -42, -13, 0, -19, 42, -13, 58, 0, 42, 13, 0
 unique_name_in_owner = true
 position = Vector2(180, 190)
 scale = Vector2(3.2, 3.2)
+show_placeholder_when_empty = false
 
 [node name="AnimationControls" type="HFlowContainer" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body"]
 layout_mode = 2

@@ -1,5 +1,8 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
-/builds/
+/builds/*
+!/builds/web/
+/builds/web/*
+!/builds/web/.gdignore
 *.tmp
