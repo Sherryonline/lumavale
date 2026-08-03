@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3]
+
+[resource]
+resource_name = "LumaVale Typography Tokens"
+LumaValeTypography/font_sizes/display = 40
+LumaValeTypography/font_sizes/title = 34
+LumaValeTypography/font_sizes/screen_heading = 30
+LumaValeTypography/font_sizes/panel_heading = 22
+LumaValeTypography/font_sizes/body_large = 18
+LumaValeTypography/font_sizes/body = 16
+LumaValeTypography/font_sizes/button = 16
+LumaValeTypography/font_sizes/caption = 14

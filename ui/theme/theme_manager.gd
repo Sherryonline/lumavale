@@ -5,7 +5,7 @@ signal ui_scale_changed(scale_factor: float)
 signal reduced_motion_changed(enabled: bool)
 signal high_contrast_changed(enabled: bool)
 
-const DEFAULT_THEME_PATH := "res://ui/theme/luma_theme.tres"
+const DEFAULT_THEME_PATH := "res://ui/themes/lumavale_theme.tres"
 const SUPPORTED_UI_SCALES: Array[float] = [1.0, 1.25, 1.5, 1.75, 2.0]
 const Tokens := preload("res://ui/theme/theme_tokens.gd")
 

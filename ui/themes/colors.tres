@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3]
+
+[resource]
+resource_name = "LumaVale Semantic Color Tokens"
+LumaValeColors/colors/background_deep = Color(0.0901961, 0.129412, 0.168627, 1)
+LumaValeColors/colors/background_warm = Color(0.929412, 0.909804, 0.870588, 1)
+LumaValeColors/colors/surface_primary = Color(0.964706, 0.945098, 0.909804, 1)
+LumaValeColors/colors/surface_secondary = Color(0.866667, 0.835294, 0.780392, 1)
+LumaValeColors/colors/primary = Color(0.207843, 0.415686, 0.588235, 1)
+LumaValeColors/colors/secondary = Color(0.27451, 0.419608, 0.34902, 1)
+LumaValeColors/colors/accent_gold = Color(0.721569, 0.537255, 0.235294, 1)
+LumaValeColors/colors/accent_burgundy = Color(0.556863, 0.270588, 0.270588, 1)
+LumaValeColors/colors/text_primary = Color(0.145098, 0.168627, 0.192157, 1)
+LumaValeColors/colors/text_secondary = Color(0.384314, 0.403922, 0.423529, 1)
+LumaValeColors/colors/text_on_dark = Color(0.956863, 0.941176, 0.909804, 1)
+LumaValeColors/colors/border_default = Color(0.584314, 0.533333, 0.470588, 1)
+LumaValeColors/colors/border_selected = Color(0.776471, 0.607843, 0.294118, 1)
+LumaValeColors/colors/danger = Color(0.65098, 0.298039, 0.298039, 1)
+LumaValeColors/colors/success = Color(0.309804, 0.462745, 0.372549, 1)
+LumaValeColors/colors/warning = Color(0.705882, 0.482353, 0.196078, 1)

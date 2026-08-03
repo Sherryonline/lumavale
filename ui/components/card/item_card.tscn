@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://ui/components/card/base_card.tscn" id="1_card"]
+
+[node name="ItemCard" instance=ExtResource("1_card")]
+title = "Item"
+description = "Item name, rarity, effects, and ownership state."
+metadata = "Common"

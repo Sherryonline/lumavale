@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://ui/screens/theme_preview.gd" id="1_preview"]
-[ext_resource type="Theme" path="res://ui/theme/luma_theme.tres" id="2_theme"]
+[ext_resource type="Theme" path="res://ui/themes/lumavale_theme.tres" id="2_theme"]
 
 [node name="ThemePreview" type="Control"]
 layout_mode = 3

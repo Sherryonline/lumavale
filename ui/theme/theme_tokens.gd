@@ -34,19 +34,57 @@ const TRANSPARENT := Color(0.0, 0.0, 0.0, 0.0)
 const SHADOW := Color(0.07, 0.09, 0.11, 0.24)
 const MODAL_BACKDROP := Color(0.05, 0.07, 0.09, 0.72)
 
+const STATE_NORMAL := &"normal"
+const STATE_HOVER := &"hover"
+const STATE_PRESSED := &"pressed"
+const STATE_FOCUSED := &"focused"
+const STATE_SELECTED := &"selected"
+const STATE_DISABLED := &"disabled"
+const STATE_LOCKED := &"locked"
+
+const TYPOGRAPHY_DISPLAY := 40
+const TYPOGRAPHY_HEADING := 30
+const TYPOGRAPHY_SECTION := 22
+const TYPOGRAPHY_BODY := 16
+const TYPOGRAPHY_CAPTION := 14
+
 const FONT_SIZE_TITLE := 34
-const FONT_SIZE_SCREEN_TITLE := 28
-const FONT_SIZE_SCREEN_HEADING := 26
-const FONT_SIZE_PANEL_HEADING := 20
+const FONT_SIZE_SCREEN_TITLE := 30
+const FONT_SIZE_SCREEN_HEADING := 30
+const FONT_SIZE_PANEL_HEADING := 22
 const FONT_SIZE_BODY := 16
 const FONT_SIZE_BUTTON := 16
-const FONT_SIZE_CAPTION := 13
+const FONT_SIZE_CAPTION := 14
 
+const SPACE_XXS := 2
 const SPACE_XS := 4
 const SPACE_SM := 8
+const SPACE_12 := 12
 const SPACE_MD := 16
 const SPACE_LG := 24
 const SPACE_XL := 32
+const SPACE_2XL := 48
+
+const RADIUS_SM := 8
+const RADIUS_MD := 10
+const RADIUS_BUTTON := 11
+const RADIUS_LG := 12
+const RADIUS_XL := 14
+
+const BORDER_STANDARD := 2
+const BORDER_FOCUS := 3
+
+const ELEVATION_STANDARD_OPACITY := 0.24
+const ELEVATION_MODAL_OPACITY := 0.28
+
+const DURATION_HOVER := 0.12
+const DURATION_PRESS := 0.08
+const DURATION_TAB := 0.14
+const DURATION_MODAL := 0.20
+const DURATION_STATUS := 0.22
+
+const INTERNAL_RESOLUTION := Vector2i(960, 540)
+const TARGET_RESOLUTION := Vector2i(1280, 720)
 
 
 static func get_color(token: StringName) -> Color:

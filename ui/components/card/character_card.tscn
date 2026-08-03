@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://ui/components/card/base_card.tscn" id="1_card"]
+
+[node name="CharacterCard" instance=ExtResource("1_card")]
+title = "Character"
+description = "Character identity, role, stats, and appearance summary."
+metadata = "Adventurer"

@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[node name="Avatar" type="Button"]
+custom_minimum_size = Vector2(80, 80)
+theme_type_variation = &"AvatarFrame"
+text = "AV"
+focus_mode = 2

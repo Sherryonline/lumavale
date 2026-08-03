@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/ui/icons/lock.svg" id="1_lock"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/none.svg" id="2_none"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/eyes.svg" id="3_eyes"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/hair_color.svg" id="4_hair_color"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/skin_tone.svg" id="5_skin_tone"]
+
+[resource]
+resource_name = "LumaVale Icon Tokens"
+LumaValeIcons/icons/lock = ExtResource("1_lock")
+LumaValeIcons/icons/none = ExtResource("2_none")
+LumaValeIcons/icons/eyes = ExtResource("3_eyes")
+LumaValeIcons/icons/hair_color = ExtResource("4_hair_color")
+LumaValeIcons/icons/skin_tone = ExtResource("5_skin_tone")

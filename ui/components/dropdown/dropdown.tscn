@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[node name="Dropdown" type="OptionButton"]
+custom_minimum_size = Vector2(220, 44)
+theme_type_variation = &"SecondaryButton"
+item_count = 3
+selected = 0
+popup/item_0/text = "Warrior"
+popup/item_0/id = 0
+popup/item_1/text = "Ranger"
+popup/item_1/id = 1
+popup/item_2/text = "Alchemist"
+popup/item_2/id = 2
+focus_mode = 2

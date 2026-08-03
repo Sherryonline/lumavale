@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://ui/components/section_header.tscn" id="1_header"]
+
+[node name="SectionHeader" instance=ExtResource("1_header")]

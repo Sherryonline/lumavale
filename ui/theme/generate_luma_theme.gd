@@ -1,6 +1,6 @@
 extends SceneTree
 
-const THEME_PATH := "res://ui/theme/luma_theme.tres"
+const THEME_PATH := "res://ui/themes/lumavale_theme.tres"
 const STYLE_DIRECTORY := "res://ui/theme/styles"
 const T := preload("res://ui/theme/theme_tokens.gd")
 

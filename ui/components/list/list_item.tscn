@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://ui/components/card/base_card.tscn" id="1_card"]
+
+[node name="ListItem" instance=ExtResource("1_card")]
+custom_minimum_size = Vector2(360, 88)
+title = "List item"
+description = "Compact reusable row for menus and selection lists."
+metadata = "Ready"
