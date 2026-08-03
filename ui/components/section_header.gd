@@ -18,8 +18,13 @@ extends VBoxContainer
 @onready var heading_label: Label = $HeadingRow/Heading
 @onready var divider: HSeparator = $Divider
 
+var _base_icon_size: Vector2
+
 
 func _ready() -> void:
+	_base_icon_size = icon_rect.custom_minimum_size
+	ThemeManager.ui_scale_changed.connect(_apply_ui_scale)
+	_apply_ui_scale(ThemeManager.ui_scale)
 	_update_content()
 
 
@@ -30,3 +35,10 @@ func _update_content() -> void:
 	icon_rect.texture = icon
 	icon_rect.visible = icon != null
 	divider.visible = show_divider
+
+
+func _apply_ui_scale(scale_factor: float) -> void:
+	icon_rect.custom_minimum_size = Vector2(
+		roundf(_base_icon_size.x * scale_factor),
+		roundf(_base_icon_size.y * scale_factor)
+	)

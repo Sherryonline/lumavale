@@ -83,6 +83,7 @@ func _configure_typography(theme: Theme) -> void:
 	_variation(theme, &"SecondaryLabel", &"Label", T.FONT_SIZE_BODY, T.TEXT_SECONDARY)
 	_variation(theme, &"CaptionLabel", &"Label", T.FONT_SIZE_CAPTION, T.TEXT_SECONDARY)
 	_variation(theme, &"DarkLabel", &"Label", T.FONT_SIZE_BODY, T.TEXT_ON_DARK)
+	_variation(theme, &"DarkTitleLabel", &"Label", T.FONT_SIZE_SCREEN_TITLE, T.TEXT_ON_DARK)
 	_variation(theme, &"DarkPanelHeading", &"Label", T.FONT_SIZE_PANEL_HEADING, T.TEXT_ON_DARK)
 	_variation(theme, &"GoldDarkLabel", &"Label", T.FONT_SIZE_BODY, T.BORDER_SELECTED)
 	_variation(theme, &"StatusLabel", &"Label", 14, T.TEXT_ON_DARK)

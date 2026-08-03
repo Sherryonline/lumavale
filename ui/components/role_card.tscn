@@ -41,6 +41,7 @@ layout_mode = 2
 theme_type_variation = &"PanelHeading"
 text = "Role"
 horizontal_alignment = 1
+text_overrun_behavior = 3
 mouse_filter = 2
 
 [node name="Description" type="Label" parent="Margin/Content"]
@@ -56,6 +57,7 @@ layout_mode = 2
 theme_type_variation = &"CaptionLabel"
 text = "Difficulty: Balanced"
 horizontal_alignment = 1
+text_overrun_behavior = 3
 mouse_filter = 2
 
 [node name="LockIndicator" type="PanelContainer" parent="."]

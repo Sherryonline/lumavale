@@ -31,6 +31,7 @@ enum Variant {
 @onready var value_label: Label = $Value
 
 var _pulse_time := 0.0
+var _base_minimum_size: Vector2
 
 var target_value: float:
 	set(new_value):
@@ -38,20 +39,25 @@ var target_value: float:
 
 
 func _ready() -> void:
+	_base_minimum_size = custom_minimum_size
 	show_percentage = false
 	target_value = value
+	ThemeManager.ui_scale_changed.connect(_apply_ui_scale)
+	_apply_ui_scale(ThemeManager.ui_scale)
 	_adopt_existing_variation()
 	_update_labels()
 
 
 func _process(delta: float) -> void:
+	var previous_value := value
 	if is_equal_approx(value, target_value):
 		value = target_value
 	elif ThemeManager.reduced_motion:
 		value = target_value
 	else:
 		value = lerpf(value, target_value, 1.0 - exp(-interpolation_speed * delta))
-	_update_labels()
+	if not is_equal_approx(previous_value, value):
+		_update_labels()
 	_update_low_hp_pulse(delta)
 
 
@@ -107,3 +113,10 @@ func _update_low_hp_pulse(delta: float) -> void:
 		return
 	_pulse_time += delta
 	self_modulate.a = lerpf(0.72, 1.0, (sin(_pulse_time * 2.0) + 1.0) * 0.5)
+
+
+func _apply_ui_scale(scale_factor: float) -> void:
+	custom_minimum_size = Vector2(
+		roundf(_base_minimum_size.x * scale_factor),
+		roundf(_base_minimum_size.y * scale_factor)
+	)

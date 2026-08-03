@@ -49,6 +49,7 @@ offset_right = -14.0
 offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="MainVBox" type="VBoxContainer" parent="SafeArea"]
@@ -73,20 +74,23 @@ theme_override_constants/separation = 0
 
 [node name="Title" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent/Identity"]
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
-theme_override_font_sizes/font_size = 28
+theme_type_variation = &"DarkTitleLabel"
 text = "LumaVale"
 
 [node name="Subtitle" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent/Identity"]
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 text = "Create Your Adventurer"
+autowrap_mode = 2
 
 [node name="Progress" type="Label" parent="SafeArea/MainVBox/Header/HeaderContent"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_type_variation = &"GoldDarkLabel"
 text = "Choose Role  •  Customize  •  Confirm"
+horizontal_alignment = 2
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="MainContent" type="HFlowContainer" parent="SafeArea/MainVBox"]
 layout_mode = 2
@@ -107,6 +111,7 @@ title = "Choose Your Role"
 [node name="RoleScroll" type="ScrollContainer" parent="SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body"]
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="RoleList" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll"]
@@ -170,7 +175,7 @@ unique_name_in_owner = true
 position = Vector2(180, 190)
 scale = Vector2(3.2, 3.2)
 
-[node name="AnimationControls" type="HBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body"]
+[node name="AnimationControls" type="HFlowContainer" parent="SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body"]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
@@ -204,6 +209,7 @@ title = "Character Details"
 [node name="InfoScroll" type="ScrollContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body"]
 layout_mode = 2
 size_flags_vertical = 3
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="CharacterInfoVBox" type="VBoxContainer" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll"]
@@ -238,6 +244,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PanelHeading"
 text = "Warrior"
+text_overrun_behavior = 3
 
 [node name="RoleDescription" type="Label" parent="SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox"]
 unique_name_in_owner = true

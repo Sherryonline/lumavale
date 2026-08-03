@@ -41,11 +41,18 @@ enum Rarity {
 @onready var equipped_label: Label = $Equipped
 @onready var selected_label: Label = $Selected
 @onready var locked_label: Label = $Locked
+@onready var lock_icon_rect: TextureRect = $LockIcon
 
 const T := preload("res://ui/theme/theme_tokens.gd")
 
+var _base_minimum_size: Vector2
+
 
 func _ready() -> void:
+	_base_minimum_size = custom_minimum_size
+	focus_mode = Control.FOCUS_ALL
+	ThemeManager.ui_scale_changed.connect(_apply_ui_scale)
+	_apply_ui_scale(ThemeManager.ui_scale)
 	_update_state()
 	_update_markers()
 
@@ -54,6 +61,8 @@ func _update_state() -> void:
 	if not is_node_ready():
 		return
 	disabled = locked
+	if locked and tooltip_text.is_empty():
+		tooltip_text = "This item is locked and unavailable."
 	if locked:
 		theme_type_variation = &"LockedItemSlot"
 	elif selected:
@@ -64,6 +73,7 @@ func _update_state() -> void:
 	rarity_ornament.text = _rarity_marker_text()
 	selected_label.visible = selected and not locked
 	locked_label.visible = locked
+	lock_icon_rect.visible = locked
 
 
 func _update_markers() -> void:
@@ -101,3 +111,14 @@ func _rarity_marker_text() -> String:
 			return "V"
 		_:
 			return "I"
+
+
+func _apply_ui_scale(scale_factor: float) -> void:
+	var base_size := Vector2(
+		maxf(_base_minimum_size.x, 48.0),
+		maxf(_base_minimum_size.y, 48.0)
+	)
+	custom_minimum_size = Vector2(
+		roundf(base_size.x * scale_factor),
+		roundf(base_size.y * scale_factor)
+	)

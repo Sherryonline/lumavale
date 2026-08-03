@@ -15,6 +15,27 @@ const SECTION_HEADER_SCENE := preload("res://ui/components/section_header.tscn")
 const MAIN_SCENE_PATH := "res://scenes/main.tscn"
 const BACK_SCENE_PATH := "res://scenes/character_creation.tscn"
 const TRANSITION_DURATION := 0.20
+const BASE_SAFE_MARGIN := Vector2(14.0, 12.0)
+const BASE_HEADER_HEIGHT := 80.0
+const BASE_ROLE_WIDTH := 210.0
+const BASE_PREVIEW_WIDTH := 300.0
+const BASE_INFO_WIDTH := 280.0
+const BASE_PREVIEW_HEIGHT := 215.0
+const BASE_ROLE_SCROLL_HEIGHT := 250.0
+const BASE_INFO_SCROLL_HEIGHT := 300.0
+const BASE_INPUT_HEIGHT := 44.0
+const BASE_FOOTER_HEIGHT := 48.0
+const APPEARANCE_CATEGORY_ORDER: Array[StringName] = [
+	&"body",
+	&"skin_color",
+	&"hair",
+	&"hair_color",
+	&"eyes",
+	&"top",
+	&"bottom",
+	&"shoes",
+	&"accessory",
+]
 
 const WARRIOR := preload("res://resources/roles/warrior.tres")
 const RANGER := preload("res://resources/roles/ranger.tres")
@@ -113,6 +134,19 @@ var _random := RandomNumberGenerator.new()
 var _transitioning: bool = false
 
 @onready var background_overlay: ColorRect = $BackgroundOverlay
+@onready var safe_area: ScrollContainer = $SafeArea
+@onready var header: PanelContainer = $SafeArea/MainVBox/Header
+@onready var role_section: VBoxContainer = $SafeArea/MainVBox/MainContent/RoleSection
+@onready var role_scroll: ScrollContainer = $SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll
+@onready var preview_section: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterPreviewSection
+@onready var info_section: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection
+@onready var info_scroll: ScrollContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll
+@onready var preview_viewport_container: SubViewportContainer = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer
+@onready var animation_buttons: Array[Button] = [
+	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/IdleButton,
+	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/WalkButton,
+	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/AttackButton,
+]
 @onready var preview_tint: ColorRect = %PreviewTint
 @onready var floor_shadow: Polygon2D = %FloorShadow
 @onready var role_list: VBoxContainer = %RoleList
@@ -126,6 +160,8 @@ var _transitioning: bool = false
 @onready var role_strengths: Label = %RoleStrengths
 @onready var randomize_button: Button = %RandomizeButton
 @onready var confirm_button: Button = %ConfirmButton
+@onready var back_button: Button = %BackButton
+@onready var footer_actions: HFlowContainer = $SafeArea/MainVBox/FooterActions
 @onready var transition_layer: ColorRect = $TransitionLayer
 
 
@@ -138,6 +174,8 @@ func _ready() -> void:
 	populate_appearance_sections()
 	_initialize_character_preview()
 	populate_roles()
+	_apply_ui_scale(ThemeManager.ui_scale)
+	_configure_focus_navigation.call_deferred()
 	validate_form()
 	character_name.grab_focus.call_deferred()
 
@@ -155,9 +193,11 @@ func _connect_signals() -> void:
 	role_option_selected.connect(select_role)
 	randomize_button.pressed.connect(randomize_appearance)
 	confirm_button.pressed.connect(_on_confirm_pressed)
-	%BackButton.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_pressed)
 	character_name.text_changed.connect(_on_character_name_changed)
 	character_name.focus_exited.connect(_trim_character_name)
+	ThemeManager.ui_scale_changed.connect(_apply_ui_scale)
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 func _initialize_selection_defaults() -> void:
@@ -193,6 +233,7 @@ func populate_roles() -> void:
 		refresh_stats()
 		refresh_starting_weapon()
 		validate_form()
+	_configure_focus_navigation.call_deferred()
 
 
 func build_role_card(role_data: RoleData) -> LumaRoleCard:
@@ -311,6 +352,7 @@ func populate_appearance_sections() -> void:
 		&"accessory", "Accessory", "Add one subtle finishing detail.", accessory_options
 	)
 	update_selected_states()
+	_configure_focus_navigation.call_deferred()
 
 
 func build_option_card(
@@ -509,7 +551,11 @@ func _add_item_section(
 			category,
 			item.id,
 			item.display_name,
-			"%s - cosmetic preview" % item.display_name,
+			(
+				"%s is locked and unavailable." % item.display_name
+				if item.locked
+				else "%s - cosmetic preview" % item.display_name
+			),
 			_thumbnail_for_item(item),
 			item.locked,
 			item
@@ -535,7 +581,11 @@ func _add_color_section(
 			category,
 			entry_id,
 			entry_name,
-			"%s color - %s" % [title, entry_name],
+			(
+				"%s color %s is locked and unavailable." % [title, entry_name]
+				if locked
+				else "%s color - %s" % [title, entry_name]
+			),
 			icon,
 			locked
 		)
@@ -596,7 +646,7 @@ func _on_back_pressed() -> void:
 func _transition_to_scene(scene_path: String) -> void:
 	_transitioning = true
 	confirm_button.disabled = true
-	%BackButton.disabled = true
+	back_button.disabled = true
 	transition_layer.visible = true
 	transition_layer.color = Color(T.BACKGROUND_DEEP, 0.0)
 
@@ -619,8 +669,87 @@ func _transition_to_scene(scene_path: String) -> void:
 		push_error("Unable to change scene to %s (error %s)." % [scene_path, change_error])
 		_transitioning = false
 		transition_layer.visible = false
-		%BackButton.disabled = false
+		back_button.disabled = false
 		validate_form()
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	var key_event := event as InputEventKey
+	if (
+		key_event != null
+		and key_event.pressed
+		and not key_event.echo
+		and key_event.keycode == KEY_ESCAPE
+	):
+		get_viewport().set_input_as_handled()
+		_on_back_pressed()
+
+
+func _apply_ui_scale(scale_factor: float) -> void:
+	var horizontal_margin := roundf(BASE_SAFE_MARGIN.x * scale_factor)
+	var vertical_margin := roundf(BASE_SAFE_MARGIN.y * scale_factor)
+	safe_area.offset_left = horizontal_margin
+	safe_area.offset_top = vertical_margin
+	safe_area.offset_right = -horizontal_margin
+	safe_area.offset_bottom = -vertical_margin
+	header.custom_minimum_size.y = roundf(BASE_HEADER_HEIGHT * scale_factor)
+	role_section.custom_minimum_size.x = roundf(BASE_ROLE_WIDTH * scale_factor)
+	preview_section.custom_minimum_size.x = roundf(BASE_PREVIEW_WIDTH * scale_factor)
+	info_section.custom_minimum_size.x = roundf(BASE_INFO_WIDTH * scale_factor)
+	preview_viewport_container.custom_minimum_size.y = roundf(
+		BASE_PREVIEW_HEIGHT * scale_factor
+	)
+	if scale_factor > 1.0:
+		role_scroll.custom_minimum_size.y = roundf(BASE_ROLE_SCROLL_HEIGHT * scale_factor)
+		info_scroll.custom_minimum_size.y = roundf(BASE_INFO_SCROLL_HEIGHT * scale_factor)
+	else:
+		role_scroll.custom_minimum_size.y = 0.0
+		info_scroll.custom_minimum_size.y = 0.0
+	character_name.custom_minimum_size.y = roundf(BASE_INPUT_HEIGHT * scale_factor)
+	footer_actions.custom_minimum_size.y = roundf(BASE_FOOTER_HEIGHT * scale_factor)
+	_configure_focus_navigation.call_deferred()
+
+
+func _on_viewport_size_changed() -> void:
+	_apply_ui_scale(ThemeManager.ui_scale)
+
+
+func _configure_focus_navigation() -> void:
+	if not is_inside_tree():
+		return
+	var focus_controls: Array[Control] = []
+	for role_data: RoleData in roles:
+		if role_data == null or not role_data.available:
+			continue
+		var role_card := _role_cards.get(role_data.id) as Control
+		if role_card != null:
+			focus_controls.append(role_card)
+	for animation_button: Button in animation_buttons:
+		focus_controls.append(animation_button)
+	focus_controls.append(character_name)
+	for category: StringName in APPEARANCE_CATEGORY_ORDER:
+		var cards: Array = _option_cards.get(category, [])
+		for card_variant: Variant in cards:
+			var option_card := card_variant as LumaAppearanceOption
+			if option_card != null and not option_card.locked:
+				focus_controls.append(option_card)
+	focus_controls.append(back_button)
+	focus_controls.append(randomize_button)
+	focus_controls.append(confirm_button)
+	if focus_controls.size() < 2:
+		return
+	for index: int in focus_controls.size():
+		var control := focus_controls[index]
+		var previous := focus_controls[(index - 1 + focus_controls.size()) % focus_controls.size()]
+		var next := focus_controls[(index + 1) % focus_controls.size()]
+		var previous_path := control.get_path_to(previous)
+		var next_path := control.get_path_to(next)
+		control.focus_previous = previous_path
+		control.focus_next = next_path
+		control.focus_neighbor_left = previous_path
+		control.focus_neighbor_top = previous_path
+		control.focus_neighbor_right = next_path
+		control.focus_neighbor_bottom = next_path
 
 
 func _trim_character_name() -> void:

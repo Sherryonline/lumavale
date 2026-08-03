@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://ui/components/appearance_option.gd" id="1_option"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/lock.svg" id="2_lock"]
 
 [node name="AppearanceOption" type="Button"]
 custom_minimum_size = Vector2(72, 72)
@@ -74,4 +75,23 @@ theme_type_variation = &"LockedMarker"
 text = "LOCK"
 horizontal_alignment = 1
 vertical_alignment = 1
+mouse_filter = 2
+
+[node name="LockIcon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -28.0
+offset_right = 10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lock")
+expand_mode = 3
+stretch_mode = 5
 mouse_filter = 2

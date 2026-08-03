@@ -18,11 +18,13 @@ text = "Forest Sword"
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 text = "Type: Weapon"
+autowrap_mode = 2
 
 [node name="Rarity" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"GoldDarkLabel"
 text = "Rarity: Rare"
+autowrap_mode = 2
 
 [node name="Description" type="RichTextLabel" parent="Content"]
 custom_minimum_size = Vector2(0, 58)
@@ -37,13 +39,16 @@ scroll_active = false
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 text = "Stats: Attack +12"
+autowrap_mode = 2
 
 [node name="Requirements" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 text = "Requirements: Level 1"
+autowrap_mode = 2
 
 [node name="Value" type="Label" parent="Content"]
 layout_mode = 2
 theme_type_variation = &"GoldDarkLabel"
 text = "Value: 45 gold"
+autowrap_mode = 2
