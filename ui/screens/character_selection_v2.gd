@@ -148,20 +148,20 @@ var _transitioning: bool = false
 	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/WalkButton,
 	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/AttackButton,
 ]
-@onready var preview_tint: ColorRect = %PreviewTint
-@onready var floor_shadow: Polygon2D = %FloorShadow
-@onready var role_list: VBoxContainer = %RoleList
-@onready var preview_character: ModularCharacter = %PreviewCharacter
-@onready var character_name: LineEdit = %CharacterName
-@onready var name_validation_message: Label = %NameValidationMessage
-@onready var appearance_list: VBoxContainer = %AppearanceList
-@onready var stats_container: VBoxContainer = %StatsContainer
-@onready var role_description: Label = %RoleDescription
-@onready var selected_role_label: Label = %SelectedRole
-@onready var role_strengths: Label = %RoleStrengths
-@onready var randomize_button: Button = %RandomizeButton
-@onready var confirm_button: Button = %ConfirmButton
-@onready var back_button: Button = %BackButton
+@onready var preview_tint: ColorRect = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewTint
+@onready var floor_shadow: Polygon2D = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld/FloorShadow
+@onready var role_list: VBoxContainer = $SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll/RoleList
+@onready var preview_character: ModularCharacter = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld/PreviewCharacter
+@onready var character_name: LineEdit = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/CharacterName
+@onready var name_validation_message: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/NameValidationMessage
+@onready var appearance_list: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/AppearanceList
+@onready var stats_container: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/StatsContainer
+@onready var role_description: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/RoleDescription
+@onready var selected_role_label: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/SelectedRole
+@onready var role_strengths: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/RoleStrengths
+@onready var randomize_button: Button = $SafeArea/MainVBox/FooterActions/RandomizeButton
+@onready var confirm_button: Button = $SafeArea/MainVBox/FooterActions/ConfirmButton
+@onready var back_button: Button = $SafeArea/MainVBox/FooterActions/BackButton
 @onready var footer_actions: HFlowContainer = $SafeArea/MainVBox/FooterActions
 @onready var transition_layer: ColorRect = $TransitionLayer
 
