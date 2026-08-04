@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemRewardData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/item_reward_data.gd" id="1_reward"]
+[ext_resource type="ItemData" path="res://resources/items/health_potion.tres" id="2_potion"]
+
+[resource]
+script = ExtResource("1_reward")
+item = ExtResource("2_potion")
+quantity = 1

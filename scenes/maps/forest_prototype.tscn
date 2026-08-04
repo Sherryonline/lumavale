@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/zone_exit.tscn" id="1_exit"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/resource_node.tscn" id="2_resource"]
+[ext_resource type="Script" path="res://scripts/monsters/slime_spawn_manager.gd" id="3_spawner"]
+[ext_resource type="ItemData" path="res://resources/items/herb.tres" id="4_herb"]
+[ext_resource type="ItemData" path="res://resources/items/wood.tres" id="5_wood"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(1120, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(30, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rock"]
+size = Vector2(90, 70)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rock"]
+bg_color = Color(0.32549, 0.364706, 0.368627, 1)
+
+[node name="ForestPrototype" type="Node2D"]
+
+[node name="GroundLayer" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1120, 0, 1120, 640, 0, 640)
+color = Color(0.454902, 0.65098, 0.462745, 1)
+
+[node name="GroundDetailLayer" type="Node2D" parent="."]
+
+[node name="CollisionLayer" type="Node2D" parent="."]
+
+[node name="NorthWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(560, 15)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/NorthWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="SouthWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(560, 625)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/SouthWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WestWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(15, 320)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/WestWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="EastWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(1105, 320)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/EastWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Rock" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(540, 330)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/Rock"]
+shape = SubResource("RectangleShape2D_rock")
+
+[node name="Visual" type="Panel" parent="CollisionLayer/Rock"]
+offset_left = -45.0
+offset_top = -35.0
+offset_right = 45.0
+offset_bottom = 35.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rock")
+
+[node name="ObjectLayer" type="Node2D" parent="."]
+
+[node name="TownExit" parent="ObjectLayer" instance=ExtResource("1_exit")]
+position = Vector2(90, 320)
+target_zone_id = &"town"
+target_spawn_id = &"from_forest"
+requires_interaction = true
+
+[node name="HerbNode" parent="ObjectLayer" instance=ExtResource("2_resource")]
+position = Vector2(300, 180)
+item = ExtResource("4_herb")
+
+[node name="WoodNode" parent="ObjectLayer" instance=ExtResource("2_resource")]
+position = Vector2(820, 440)
+item = ExtResource("5_wood")
+
+[node name="SlimeSpawnManager" type="Node2D" parent="ObjectLayer"]
+script = ExtResource("3_spawner")
+
+[node name="SlimeSpawnA" type="Marker2D" parent="ObjectLayer/SlimeSpawnManager"]
+position = Vector2(390, 250)
+
+[node name="SlimeSpawnB" type="Marker2D" parent="ObjectLayer/SlimeSpawnManager"]
+position = Vector2(720, 250)
+
+[node name="SlimeSpawnC" type="Marker2D" parent="ObjectLayer/SlimeSpawnManager"]
+position = Vector2(760, 470)
+
+[node name="ForegroundLayer" type="Node2D" parent="."]
+
+[node name="NavigationLayer" type="Node2D" parent="."]
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="from_town" type="Marker2D" parent="Spawns"]
+position = Vector2(140, 320)
+
+[node name="player_spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(140, 320)
+
+[node name="CameraBounds" type="ReferenceRect" parent="."]
+offset_right = 1120.0
+offset_bottom = 640.0

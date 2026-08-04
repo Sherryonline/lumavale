@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/quests/quest_data.gd" id="1_quest"]
+[ext_resource type="QuestObjectiveData" path="res://resources/quests/slime_cleanup_defeat.tres" id="2_defeat"]
+[ext_resource type="QuestObjectiveData" path="res://resources/quests/slime_cleanup_collect.tres" id="3_collect"]
+[ext_resource type="ItemRewardData" path="res://resources/quests/slime_cleanup_reward_potion.tres" id="4_reward"]
+
+[resource]
+script = ExtResource("1_quest")
+id = &"slime_cleanup"
+title = "Slime Cleanup"
+description = "Defeat 3 Slimes and collect 3 Slime Gels for the town board."
+objectives = Array[QuestObjectiveData]([ExtResource("2_defeat"), ExtResource("3_collect")])
+reward_gold = 50
+reward_items = Array[ItemRewardData]([ExtResource("4_reward")])

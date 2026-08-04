@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/monsters/slime.gd" id="1_slime"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="2_health"]
+[ext_resource type="MonsterData" path="res://resources/monsters/slime_data.tres" id="3_data"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slime"]
+radius = 13.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slime"]
+bg_color = Color(0.407843, 0.658824, 0.490196, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.247059, 0.423529, 0.305882, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="Slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_slime")
+data = ExtResource("3_data")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_slime")
+
+[node name="Visual" type="Panel" parent="."]
+offset_left = -14.0
+offset_top = -14.0
+offset_right = 14.0
+offset_bottom = 14.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_slime")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -50.0
+offset_top = -38.0
+offset_right = 50.0
+offset_bottom = -18.0
+theme_type_variation = &"CaptionLabel"
+text = "Slime"
+horizontal_alignment = 1
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")

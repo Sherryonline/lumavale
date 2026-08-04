@@ -1,0 +1,154 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/interactables/quest_board.tscn" id="1_board"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/zone_exit.tscn" id="2_exit"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
+size = Vector2(920, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_v"]
+size = Vector2(28, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_building"]
+size = Vector2(150, 90)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_building"]
+bg_color = Color(0.533333, 0.345098, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npc"]
+bg_color = Color(0.207843, 0.415686, 0.588235, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="TownPrototype" type="Node2D"]
+
+[node name="GroundLayer" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 960, 0, 960, 540, 0, 540)
+color = Color(0.760784, 0.807843, 0.678431, 1)
+
+[node name="GroundDetailLayer" type="Node2D" parent="."]
+
+[node name="CollisionLayer" type="Node2D" parent="."]
+
+[node name="NorthWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(480, 14)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/NorthWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="SouthWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(480, 526)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/SouthWall"]
+shape = SubResource("RectangleShape2D_wall_h")
+
+[node name="WestWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(14, 270)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/WestWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="EastWall" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(946, 270)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/EastWall"]
+shape = SubResource("RectangleShape2D_wall_v")
+
+[node name="Building" type="StaticBody2D" parent="CollisionLayer"]
+position = Vector2(285, 180)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLayer/Building"]
+shape = SubResource("RectangleShape2D_building")
+
+[node name="Visual" type="Panel" parent="CollisionLayer/Building"]
+offset_left = -75.0
+offset_top = -45.0
+offset_right = 75.0
+offset_bottom = 45.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_building")
+
+[node name="Label" type="Label" parent="CollisionLayer/Building"]
+offset_left = -72.0
+offset_top = -10.0
+offset_right = 72.0
+offset_bottom = 12.0
+text = "Town Hall"
+horizontal_alignment = 1
+
+[node name="ObjectLayer" type="Node2D" parent="."]
+
+[node name="QuestBoard" parent="ObjectLayer" instance=ExtResource("1_board")]
+position = Vector2(180, 330)
+
+[node name="Merchant" type="Panel" parent="ObjectLayer"]
+offset_left = 586.0
+offset_top = 143.0
+offset_right = 646.0
+offset_bottom = 203.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_npc")
+
+[node name="Label" type="Label" parent="ObjectLayer/Merchant"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Merchant"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Blacksmith" type="Panel" parent="ObjectLayer"]
+offset_left = 682.0
+offset_top = 318.0
+offset_right = 758.0
+offset_bottom = 378.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_npc")
+
+[node name="Label" type="Label" parent="ObjectLayer/Blacksmith"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Blacksmith"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ForestExit" parent="ObjectLayer" instance=ExtResource("2_exit")]
+position = Vector2(858, 270)
+target_zone_id = &"forest"
+target_spawn_id = &"from_town"
+requires_interaction = true
+
+[node name="ForegroundLayer" type="Node2D" parent="."]
+
+[node name="NavigationLayer" type="Node2D" parent="."]
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="player_spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(480, 360)
+
+[node name="town_respawn" type="Marker2D" parent="Spawns"]
+position = Vector2(480, 360)
+
+[node name="from_forest" type="Marker2D" parent="Spawns"]
+position = Vector2(800, 270)
+
+[node name="CameraBounds" type="ReferenceRect" parent="."]
+offset_right = 960.0
+offset_bottom = 540.0

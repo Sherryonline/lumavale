@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/loot/loot_table.gd" id="1_loot"]
+[ext_resource type="ItemData" path="res://resources/items/slime_gel.tres" id="2_gel"]
+[ext_resource type="ItemData" path="res://resources/items/health_potion.tres" id="3_potion"]
+
+[resource]
+script = ExtResource("1_loot")
+entries = Array[Dictionary]([{
+"item": ExtResource("2_gel"),
+"quantity": 1,
+"chance": 1.0
+}, {
+"item": ExtResource("3_potion"),
+"quantity": 1,
+"chance": 0.1
+}])

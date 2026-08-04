@@ -630,7 +630,8 @@ func _on_confirm_pressed() -> void:
 	if data.is_empty():
 		character_name.grab_focus()
 		return
-	GameSession.set_character_data(data)
+	GameState.start_new_character(data)
+	SaveManager.save_game()
 	_transition_to_scene(MAIN_SCENE_PATH)
 
 
