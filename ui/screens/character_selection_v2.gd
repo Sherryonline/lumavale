@@ -134,39 +134,41 @@ var _role_cards: Dictionary = {}
 var _random := RandomNumberGenerator.new()
 var _transitioning: bool = false
 
-@onready var background_overlay: ColorRect = $BackgroundOverlay
-@onready var safe_area: ScrollContainer = $SafeArea
-@onready var header: PanelContainer = $SafeArea/MainVBox/Header
-@onready var role_section: VBoxContainer = $SafeArea/MainVBox/MainContent/RoleSection
-@onready var role_scroll: ScrollContainer = $SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll
-@onready var preview_section: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterPreviewSection
-@onready var info_section: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection
-@onready var info_scroll: ScrollContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll
-@onready var preview_viewport_container: SubViewportContainer = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer
-@onready var animation_buttons: Array[Button] = [
-	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/IdleButton,
-	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/WalkButton,
-	$SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/AnimationControls/AttackButton,
-]
-@onready var preview_tint: ColorRect = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewTint
-@onready var floor_shadow: Polygon2D = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld/FloorShadow
-@onready var role_list: VBoxContainer = $SafeArea/MainVBox/MainContent/RoleSection/RolePanel/Content/Body/RoleScroll/RoleList
-@onready var preview_character: ModularCharacter = $SafeArea/MainVBox/MainContent/CharacterPreviewSection/PreviewPanel/Content/Body/PreviewViewportContainer/PreviewViewport/PreviewWorld/PreviewCharacter
-@onready var character_name: LineEdit = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/CharacterName
-@onready var name_validation_message: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/NameValidationMessage
-@onready var appearance_list: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/AppearanceList
-@onready var stats_container: VBoxContainer = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/StatsContainer
-@onready var role_description: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/RoleDescription
-@onready var selected_role_label: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/SelectedRole
-@onready var role_strengths: Label = $SafeArea/MainVBox/MainContent/CharacterInfoSection/InfoPanel/Content/Body/InfoScroll/CharacterInfoVBox/RoleStrengths
-@onready var randomize_button: Button = $SafeArea/MainVBox/FooterActions/RandomizeButton
-@onready var confirm_button: Button = $SafeArea/MainVBox/FooterActions/ConfirmButton
-@onready var back_button: Button = $SafeArea/MainVBox/FooterActions/BackButton
-@onready var footer_actions: HFlowContainer = $SafeArea/MainVBox/FooterActions
-@onready var transition_layer: ColorRect = $TransitionLayer
+@onready var background_overlay: ColorRect = _find_required_node(&"BackgroundOverlay") as ColorRect
+@onready var safe_area: ScrollContainer = _find_required_node(&"SafeArea") as ScrollContainer
+@onready var header: PanelContainer = _find_required_node(&"Header") as PanelContainer
+@onready var role_section: VBoxContainer = _find_required_node(&"RoleSection") as VBoxContainer
+@onready var role_scroll: ScrollContainer = _find_required_node(&"RoleScroll") as ScrollContainer
+@onready var preview_section: VBoxContainer = _find_required_node(&"CharacterPreviewSection") as VBoxContainer
+@onready var info_section: VBoxContainer = _find_required_node(&"CharacterInfoSection") as VBoxContainer
+@onready var info_scroll: ScrollContainer = _find_required_node(&"InfoScroll") as ScrollContainer
+@onready var preview_viewport_container: SubViewportContainer = _find_required_node(&"PreviewViewportContainer") as SubViewportContainer
+@onready var idle_button: Button = _find_required_node(&"IdleButton") as Button
+@onready var walk_button: Button = _find_required_node(&"WalkButton") as Button
+@onready var attack_button: Button = _find_required_node(&"AttackButton") as Button
+@onready var animation_buttons: Array[Button] = [idle_button, walk_button, attack_button]
+@onready var preview_tint: ColorRect = _find_required_node(&"PreviewTint") as ColorRect
+@onready var floor_shadow: Polygon2D = _find_required_node(&"FloorShadow") as Polygon2D
+@onready var role_list: VBoxContainer = _find_required_node(&"RoleList") as VBoxContainer
+@onready var preview_character: ModularCharacter = _find_required_node(&"PreviewCharacter") as ModularCharacter
+@onready var character_name: LineEdit = _find_required_node(&"CharacterName") as LineEdit
+@onready var name_validation_message: Label = _find_required_node(&"NameValidationMessage") as Label
+@onready var appearance_list: VBoxContainer = _find_required_node(&"AppearanceList") as VBoxContainer
+@onready var stats_container: VBoxContainer = _find_required_node(&"StatsContainer") as VBoxContainer
+@onready var role_description: Label = _find_required_node(&"RoleDescription") as Label
+@onready var selected_role_label: Label = _find_required_node(&"SelectedRole") as Label
+@onready var role_strengths: Label = _find_required_node(&"RoleStrengths") as Label
+@onready var randomize_button: Button = _find_required_node(&"RandomizeButton") as Button
+@onready var confirm_button: Button = _find_required_node(&"ConfirmButton") as Button
+@onready var back_button: Button = _find_required_node(&"BackButton") as Button
+@onready var footer_actions: HFlowContainer = _find_required_node(&"FooterActions") as HFlowContainer
+@onready var transition_layer: ColorRect = _find_required_node(&"TransitionLayer") as ColorRect
 
 
 func _ready() -> void:
+	if not _required_nodes_are_available():
+		push_error("CharacterSelectionV2 initialization stopped because required UI nodes are missing.")
+		return
 	ThemeManager.apply_theme(self)
 	_random.randomize()
 	_apply_presentation_tokens()
@@ -179,6 +181,50 @@ func _ready() -> void:
 	_configure_focus_navigation.call_deferred()
 	validate_form()
 	character_name.grab_focus.call_deferred()
+
+
+func _find_required_node(node_name: StringName) -> Node:
+	var found_node := find_child(String(node_name), true, false)
+	if found_node == null:
+		push_error("CharacterSelectionV2 missing required node: %s." % node_name)
+	return found_node
+
+
+func _required_nodes_are_available() -> bool:
+	var required_nodes: Array[Node] = [
+		background_overlay,
+		safe_area,
+		header,
+		role_section,
+		role_scroll,
+		preview_section,
+		info_section,
+		info_scroll,
+		preview_viewport_container,
+		idle_button,
+		walk_button,
+		attack_button,
+		preview_tint,
+		floor_shadow,
+		role_list,
+		preview_character,
+		character_name,
+		name_validation_message,
+		appearance_list,
+		stats_container,
+		role_description,
+		selected_role_label,
+		role_strengths,
+		randomize_button,
+		confirm_button,
+		back_button,
+		footer_actions,
+		transition_layer,
+	]
+	for required_node: Node in required_nodes:
+		if required_node == null:
+			return false
+	return true
 
 
 func _apply_presentation_tokens() -> void:
